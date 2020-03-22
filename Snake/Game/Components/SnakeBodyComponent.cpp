@@ -23,31 +23,17 @@
 */
 
 #include "Game/Components/SnakeBodyComponent.hpp"
-#include "Game/Components/TransformComponent.hpp"
 
 SnakeBodyComponent::SnakeBodyComponent(int size) {
-    this->addComponent(new TransformComponent(0, 0, WIDTH, HEIGHT));
-    
-    SnakeBodyComponent* snakeBodyComponent = this;
-    for(int i = 0; i < size - 1; ++i) {
-        TransformComponent* transformComponent = snakeBodyComponent->getComponent<TransformComponent>();
-        SnakeBodyComponent* nextSnakeBodyComponent = new SnakeBodyComponent(transformComponent->positionVector.x() + WIDTH - 1, transformComponent->positionVector.y());
-        snakeBodyComponent->addComponent(nextSnakeBodyComponent);
-        snakeBodyComponent = nextSnakeBodyComponent;
+    for(int i = 0; i < size; ++i) {
+        snakeBody.push_back(new TransformComponent(i, 0, WIDTH, HEIGHT));
     }
 }
 
-SnakeBodyComponent::SnakeBodyComponent(int x, int y) {
-    this->addComponent(new TransformComponent(x, y, WIDTH, HEIGHT));
-}
-
-void SnakeBodyComponent::grow() {
-    // TODO - this needs to be done w.r.t when the snake actually eats
-//    SnakeBodyComponent* snakeBodyComponent = this;
-//    while(snakeBodyComponent->getComponent<SnakeBodyComponent>() != nullptr) {
-//        snakeBodyComponent = snakeBodyComponent->getComponent<SnakeBodyComponent>();
-//    }
-//
-//    TransformComponent* transformComponent = snakeBodyComponent->getComponent<TransformComponent>();
-//    snakeBodyComponent->addComponent(new SnakeBodyComponent(transformComponent->positionVector.x() + WIDTH - 1, transformComponent->positionVector.y()));
+SnakeBodyComponent::~SnakeBodyComponent() {
+    for(TransformComponent* transformComponent : snakeBody) {
+        delete transformComponent;
+        transformComponent = nullptr;
+    }
+    snakeBody.clear();
 }

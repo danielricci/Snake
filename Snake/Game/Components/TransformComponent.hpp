@@ -32,43 +32,24 @@
 class TransformComponent : public Component {
 public:
     TransformComponent() = default;
-
+    
     TransformComponent(int x, int y, int width, int height) {
-        this->positionVector(0) = x;
-        this->positionVector(1) = y;
-        this->dimensionVector(0) = width;
-        this->dimensionVector(1) = height;
-    }
-    
-    TransformComponent(const SDL_Rect& rectangle) : TransformComponent(rectangle.x, rectangle.y, rectangle.w, rectangle.h) {
-    }
-        
-    void applyVelocity() {
-        this->positionVector += velocityVector;
-    }
-    void undoVelocity() {
-        this->positionVector -= velocityVector;
-    }
-    
-    void invertVelocityX() {
-        this->velocityVector.x() *= -1;
-    }
-    
-    void invertVelocityY() {
-        this->velocityVector.y() *= -1;
+        this->positionVector.x() = x;
+        this->positionVector.y() = y;
+        this->dimensionVector.x() = width;
+        this->dimensionVector.y() = height;
     }
         
     SDL_Rect rectangle() const {
         SDL_Rect rectangle;
-        rectangle.x = positionVector(0);
-        rectangle.y = positionVector(1);
-        rectangle.w = dimensionVector(0);
-        rectangle.h = dimensionVector(1);
-        
+        rectangle.x = positionVector.x();
+        rectangle.y = positionVector.y();
+        rectangle.w = dimensionVector.x();
+        rectangle.h = dimensionVector.y();
         return rectangle;
     }
     
+    Eigen::Vector2f dimensionVector { 0, 0 };
     Eigen::Vector2f positionVector { 0, 0 };
     Eigen::Vector2f velocityVector { 0, 0 };
-    Eigen::Vector2f dimensionVector { 0, 0 };
 };

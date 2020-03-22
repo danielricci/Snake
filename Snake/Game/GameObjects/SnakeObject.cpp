@@ -27,6 +27,6 @@
 #include "Game/GameObjects/SnakeObject.hpp"
 
 SnakeObject::SnakeObject(int x, int y) : GameObject(x, y) {
-    this->addComponent(new SnakeBodyComponent(2));
+    this->addComponent(new SnakeBodyComponent(10));
     this->addComponent(new RenderComponent());
 }
