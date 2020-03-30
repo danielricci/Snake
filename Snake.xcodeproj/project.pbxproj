@@ -85,13 +85,13 @@
 		032220182380FE60004B0BD1 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				03219D442406B07A0050588A /* Managers */,
 				03EFD23C237E49CA006EF2A5 /* Components */,
 				03EFD235237E48BA006EF2A5 /* GameObjects */,
 				032220192380FF9D004B0BD1 /* GameWindow.cpp */,
 				0322201A2380FF9D004B0BD1 /* GameWindow.hpp */,
 				03EFD232237D004B006EF2A5 /* GameWorld.cpp */,
 				03EFD233237D004B006EF2A5 /* GameWorld.hpp */,
+				03219D442406B07A0050588A /* Managers */,
 				03A78AFF23845F0000856F98 /* Primitives */,
 				03EBAAAD23918F4900F8BDE5 /* Systems */,
 			);
@@ -145,10 +145,10 @@
 		03EFD235237E48BA006EF2A5 /* GameObjects */ = {
 			isa = PBXGroup;
 			children = (
-				03A1675924190C320014CA0D /* SnakeObject.cpp */,
-				03A1675A24190C320014CA0D /* SnakeObject.hpp */,
 				035DB9DF238B75D90025B2F7 /* GameObject.cpp */,
 				03EFD237237E48D9006EF2A5 /* GameObject.hpp */,
+				03A1675924190C320014CA0D /* SnakeObject.cpp */,
+				03A1675A24190C320014CA0D /* SnakeObject.hpp */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -162,9 +162,9 @@
 				03A1E57E238F56E900A02AB7 /* PaddleInputComponent.cpp */,
 				03A1E57F238F56E900A02AB7 /* PaddleInputComponent.hpp */,
 				03987B54239559A60004639E /* RenderComponent.hpp */,
-				035DB9E2238B76AA0025B2F7 /* TransformComponent.hpp */,
 				03D811A32415E32500DAFD88 /* SnakeBodyComponent.cpp */,
 				03D811A42415E32500DAFD88 /* SnakeBodyComponent.hpp */,
+				035DB9E2238B76AA0025B2F7 /* TransformComponent.hpp */,
 			);
 			path = Components;
 			sourceTree = "<group>";

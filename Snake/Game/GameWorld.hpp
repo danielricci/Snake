@@ -27,7 +27,6 @@
 #include "Game/GameObjects/GameObject.hpp"
 #include "Game/Systems/RenderSystem.hpp"
 
-
 #include <SDL.h>
 
 #include <list>
@@ -74,7 +73,8 @@ private:
         return components;
     }
     
-    SDL_Renderer& renderer;
     std::list<GameObject*> gameObjects;
+    
+    SDL_Renderer& renderer;
     RenderSystem* renderSystem =  new RenderSystem();
 };

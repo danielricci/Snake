@@ -27,13 +27,14 @@
 #include "Game/GameWorld.hpp"
 #include "Game/Managers/InputManager.hpp"
 
+#include <iostream>
+
 GameWorld::GameWorld(SDL_Renderer& renderer) : renderer(renderer) {
     InputManager::getInstance();
     gameObjects.push_back(new SnakeObject(300, 300));
 }
 
 GameWorld::~GameWorld() {
-    
     // Handle the managers
     InputManager::getInstance()->terminate();
 
@@ -50,35 +51,46 @@ GameWorld::~GameWorld() {
 }
 
 void GameWorld::run() {
-    // Initial clearing of the screen before proceeding
-    SDL_SetRenderDrawColor(&renderer, 0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE);
-    SDL_RenderClear(&renderer);
-    SDL_RenderPresent(&renderer);
-        
+    // Create a timer that will push a user event to indicate that `something special` should occur
+    SDL_TimerID timerId = SDL_AddTimer(1000, [](Uint32 interval, void* param) -> Uint32 {
+        SDL_UserEvent userevent;
+        userevent.type = SDL_USEREVENT;
+        userevent.code = 0;
+        userevent.data1 = NULL;
+        userevent.data2 = NULL;
+
+        SDL_Event event;
+        event.type = SDL_USEREVENT;
+        event.user = userevent;
+
+        SDL_PushEvent(&event);
+        return interval;
+    }, nullptr);
+
+    // Run the game loop
     bool isGameQuit = false;
-    
-    while(true) {
+    while(!isGameQuit) {
         SDL_Event event;
         while(SDL_PollEvent(&event) != 0) {
-            if(event.type == SDL_QUIT || event.key.keysym.sym == SDLK_ESCAPE) {
-                isGameQuit = true;
-                break;
+            switch(event.type) {
+                case SDL_QUIT: {
+                    SDL_RemoveTimer(timerId);
+                    isGameQuit = true;
+                    break;
+                }
+                case SDL_USEREVENT: {
+                    std::cout << "SDL_USEREVENT" << std::endl;
+                    break;
+                }
             }
         }
         
-        if(isGameQuit) {
-            break;
-        }
-                
-        // Render System
+        // Draw the contents of the game onto the screen
         SDL_SetRenderDrawColor(&renderer, 0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE);
         SDL_RenderClear(&renderer);
-        
         for(GameObject* gameObject : gameObjects) {
             renderSystem->update(renderer, gameObject);
         }
-        
-        // Blit everything
         SDL_RenderPresent(&renderer);
     }
 }
