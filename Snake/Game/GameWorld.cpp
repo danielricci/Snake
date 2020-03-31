@@ -22,7 +22,6 @@
 * SOFTWARE.
 */
 
-#include "Game/Components/PaddleInputComponent.hpp"
 #include "Game/GameObjects/SnakeObject.hpp"
 #include "Game/GameWorld.hpp"
 #include "Game/Managers/InputManager.hpp"
@@ -79,10 +78,13 @@ void GameWorld::run() {
                     break;
                 }
                 case SDL_USEREVENT: {
-                    std::cout << "SDL_USEREVENT" << std::endl;
+                    //this->getGameObject<SnakeGameObject>()
                     break;
                 }
             }
+            
+            // Handle any inputs
+            InputManager::getInstance()->process(event, getGameComponents<SnakeObject, InputComponent>());
         }
         
         // Draw the contents of the game onto the screen

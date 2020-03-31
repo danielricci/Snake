@@ -11,11 +11,11 @@
 		0322201B2380FF9D004B0BD1 /* GameWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 032220192380FF9D004B0BD1 /* GameWindow.cpp */; };
 		0350F2B223A324FB0038A52E /* CollisionComponent.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 0350F2B123A324FB0038A52E /* CollisionComponent.hpp */; };
 		035DB9E0238B75D90025B2F7 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 035DB9DF238B75D90025B2F7 /* GameObject.cpp */; };
-		0389AD802396F4CA005EEC22 /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0389AD7F2396F4CA005EEC22 /* libSDL2.a */; };
+		039363CD2431980E006160D1 /* SnakeInputComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 039363CB2431980E006160D1 /* SnakeInputComponent.cpp */; };
 		039E6C17234E30B0004CCD78 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 039E6C16234E30B0004CCD78 /* main.cpp */; };
 		03A1675B24190C320014CA0D /* SnakeObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03A1675924190C320014CA0D /* SnakeObject.cpp */; };
 		03A1675E241AA0B10014CA0D /* RenderSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03A1675C241AA0B10014CA0D /* RenderSystem.cpp */; };
-		03A1E580238F56E900A02AB7 /* PaddleInputComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03A1E57E238F56E900A02AB7 /* PaddleInputComponent.cpp */; };
+		03CEDEB5243289EE005CE12B /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03CEDEB4243289CA005CE12B /* libSDL2.a */; };
 		03D811A52415E32500DAFD88 /* SnakeBodyComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03D811A32415E32500DAFD88 /* SnakeBodyComponent.cpp */; };
 		03EFD234237D004B006EF2A5 /* GameWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03EFD232237D004B006EF2A5 /* GameWorld.cpp */; };
 /* End PBXBuildFile section */
@@ -45,14 +45,15 @@
 		035DB9E2238B76AA0025B2F7 /* TransformComponent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TransformComponent.hpp; sourceTree = "<group>"; };
 		037280BD234F9A0D008472B1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0389AD7F2396F4CA005EEC22 /* libSDL2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2.a; path = ../../../../../../../../usr/local/Cellar/sdl2/2.0.10/lib/libSDL2.a; sourceTree = "<group>"; };
+		039363CB2431980E006160D1 /* SnakeInputComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SnakeInputComponent.cpp; sourceTree = "<group>"; };
+		039363CC2431980E006160D1 /* SnakeInputComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SnakeInputComponent.hpp; sourceTree = "<group>"; };
 		03987B54239559A60004639E /* RenderComponent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RenderComponent.hpp; sourceTree = "<group>"; };
 		039E6C16234E30B0004CCD78 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		03A1675924190C320014CA0D /* SnakeObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SnakeObject.cpp; sourceTree = "<group>"; };
 		03A1675A24190C320014CA0D /* SnakeObject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SnakeObject.hpp; sourceTree = "<group>"; };
 		03A1675C241AA0B10014CA0D /* RenderSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderSystem.cpp; sourceTree = "<group>"; };
 		03A1675D241AA0B10014CA0D /* RenderSystem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RenderSystem.hpp; sourceTree = "<group>"; };
-		03A1E57E238F56E900A02AB7 /* PaddleInputComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PaddleInputComponent.cpp; sourceTree = "<group>"; };
-		03A1E57F238F56E900A02AB7 /* PaddleInputComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PaddleInputComponent.hpp; sourceTree = "<group>"; };
+		03CEDEB4243289CA005CE12B /* libSDL2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2.a; path = ../../../../../../../../usr/local/Cellar/sdl2/2.0.12/lib/libSDL2.a; sourceTree = "<group>"; };
 		03D47C5E2381B00A0004A67B /* InputComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = InputComponent.hpp; sourceTree = "<group>"; };
 		03D811A32415E32500DAFD88 /* SnakeBodyComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SnakeBodyComponent.cpp; sourceTree = "<group>"; };
 		03D811A42415E32500DAFD88 /* SnakeBodyComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SnakeBodyComponent.hpp; sourceTree = "<group>"; };
@@ -66,7 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0389AD802396F4CA005EEC22 /* libSDL2.a in Frameworks */,
+				03CEDEB5243289EE005CE12B /* libSDL2.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +102,7 @@
 		0389AD7E2396F4CA005EEC22 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				03CEDEB4243289CA005CE12B /* libSDL2.a */,
 				0389AD7F2396F4CA005EEC22 /* libSDL2.a */,
 			);
 			name = Frameworks;
@@ -159,12 +161,12 @@
 				0350F2B123A324FB0038A52E /* CollisionComponent.hpp */,
 				035DB9DD238B73EF0025B2F7 /* Component.hpp */,
 				03D47C5E2381B00A0004A67B /* InputComponent.hpp */,
-				03A1E57E238F56E900A02AB7 /* PaddleInputComponent.cpp */,
-				03A1E57F238F56E900A02AB7 /* PaddleInputComponent.hpp */,
 				03987B54239559A60004639E /* RenderComponent.hpp */,
 				03D811A32415E32500DAFD88 /* SnakeBodyComponent.cpp */,
 				03D811A42415E32500DAFD88 /* SnakeBodyComponent.hpp */,
 				035DB9E2238B76AA0025B2F7 /* TransformComponent.hpp */,
+				039363CB2431980E006160D1 /* SnakeInputComponent.cpp */,
+				039363CC2431980E006160D1 /* SnakeInputComponent.hpp */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -249,11 +251,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				03A1675E241AA0B10014CA0D /* RenderSystem.cpp in Sources */,
-				03A1E580238F56E900A02AB7 /* PaddleInputComponent.cpp in Sources */,
 				03A1675B24190C320014CA0D /* SnakeObject.cpp in Sources */,
 				0350F2B223A324FB0038A52E /* CollisionComponent.hpp in Sources */,
 				03219D472406B5F70050588A /* InputManager.cpp in Sources */,
 				035DB9E0238B75D90025B2F7 /* GameObject.cpp in Sources */,
+				039363CD2431980E006160D1 /* SnakeInputComponent.cpp in Sources */,
 				03D811A52415E32500DAFD88 /* SnakeBodyComponent.cpp in Sources */,
 				03EFD234237D004B006EF2A5 /* GameWorld.cpp in Sources */,
 				0322201B2380FF9D004B0BD1 /* GameWindow.cpp in Sources */,
@@ -386,15 +388,10 @@
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = (
-					"/usr/local/include/eigen3/**",
-					"/usr/local/include/SDL2/**",
+					/usr/local/include/SDL2,
+					/usr/local/include/eigen3,
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"/usr/local/lib/**",
-					/usr/local/Cellar/sdl2/2.0.10/lib,
-					/usr/local/Cellar/sdl2_ttf/2.0.15/lib,
-					/usr/local/Cellar/sdl2_mixer/2.0.4/lib,
-				);
+				LIBRARY_SEARCH_PATHS = "/usr/local/lib/**";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Snake/**";
@@ -415,15 +412,10 @@
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = (
-					"/usr/local/include/eigen3/**",
-					"/usr/local/include/SDL2/**",
+					/usr/local/include/SDL2,
+					/usr/local/include/eigen3,
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"/usr/local/lib/**",
-					/usr/local/Cellar/sdl2/2.0.10/lib,
-					/usr/local/Cellar/sdl2_ttf/2.0.15/lib,
-					/usr/local/Cellar/sdl2_mixer/2.0.4/lib,
-				);
+				LIBRARY_SEARCH_PATHS = "/usr/local/lib/**";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Snake/**";
