@@ -26,6 +26,7 @@
 
 #include "Game/GameObjects/GameObject.hpp"
 #include "Game/Systems/RenderSystem.hpp"
+#include "Game/Systems/MovementSystem.hpp"
 
 #include <SDL.h>
 
@@ -73,8 +74,11 @@ private:
         return components;
     }
     
+    int tickSpeed = 1000;
+    
     std::list<GameObject*> gameObjects;
     
     SDL_Renderer& renderer;
     RenderSystem* renderSystem =  new RenderSystem();
+    MovementSystem* movementSystem = new MovementSystem();
 };

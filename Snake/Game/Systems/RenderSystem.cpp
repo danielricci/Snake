@@ -35,8 +35,8 @@ void RenderSystem::update(SDL_Renderer& renderer, GameObject* gameObject) {
             if(snakeBodyComponent != nullptr) {
                 TransformComponent* gameObjectTransformComponent = gameObject->getComponent<TransformComponent>();
                 SDL_SetRenderDrawColor(&renderer, 0x00, 0xFF, 0x00, SDL_ALPHA_OPAQUE);
-                for(int i = 0; i < snakeBodyComponent->size(); ++i) {
-                    TransformComponent* snakeBodyTransform = (*snakeBodyComponent)[i];
+                for(int i = 0; i < snakeBodyComponent->snakeBody.size(); ++i) {
+                    TransformComponent* snakeBodyTransform = snakeBodyComponent->snakeBody[i];
                     SDL_Rect rectangle;
                     rectangle.x = gameObjectTransformComponent->positionVector.x() + (snakeBodyTransform->positionVector.x() * snakeBodyTransform->dimensionVector.x());
                     rectangle.y = gameObjectTransformComponent->positionVector.y() + (snakeBodyTransform->positionVector.y() * snakeBodyTransform->dimensionVector.y());

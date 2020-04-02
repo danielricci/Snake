@@ -34,16 +34,8 @@ public:
     SnakeBodyComponent(int size);
     virtual ~SnakeBodyComponent();
     
-    inline TransformComponent* operator[](int index) {
-        return snakeBody[index];
-    }
-    
-    inline std::deque<TransformComponent*>::size_type size() const {
-        return snakeBody.size();
-    }
+    std::deque<TransformComponent*> snakeBody;
 private:
     const int HEIGHT = 9;
     const int WIDTH = 9;
-    
-    std::deque<TransformComponent*> snakeBody;
 };

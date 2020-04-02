@@ -27,5 +27,5 @@
 #include <SDL.h>
 
 int main(int argc, char** argv) {
-    GameWindow("Snake", 640, 480).show();
+    GameWindow("Snake", 800, 600).show();
 }

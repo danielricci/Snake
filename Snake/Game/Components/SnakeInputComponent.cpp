@@ -11,29 +11,29 @@ void SnakeInputComponent::onMove(const SDL_Event& event) {
     if(event.type == SDL_KEYUP) {
         switch(event.key.keysym.sym) {
             case SDLK_UP: {
-                if(directionY != 1) {
-                    directionY = -1;
-                    directionX = 0;
+                if(positionVector.y() != 1) {
+                    positionVector.y() = -1;
+                    positionVector.x() = 0;
                 }
                 break;
             }
             case SDLK_LEFT:
-                if(directionX != 1) {
-                    directionX = -1;
-                    directionY = 0;
+                if(positionVector.x() != 1) {
+                    positionVector.x() = -1;
+                    positionVector.y() = 0;
                 }
                 break;
             case SDLK_DOWN: {
-                if(directionY != -1) {
-                    directionY = 1;
-                    directionX = 0;
+                if(positionVector.y() != -1) {
+                    positionVector.y() = 1;
+                    positionVector.x() = 0;
                 }
                 break;
             }
             case SDLK_RIGHT: {
-                if(directionX != -1) {
-                    directionX = 1;
-                    directionY = 0;
+                if(positionVector.x() != -1) {
+                    positionVector.x() = 1;
+                    positionVector.y() = 0;
                 }
                 break;
             }

@@ -25,6 +25,7 @@
 #pragma once
 
 #include "Game/GameObjects/GameObject.hpp"
+#include "Game/GameObjects/SnakeObject.hpp"
 
 #include <SDL.h>
 
@@ -32,8 +33,10 @@
 
 class MovementSystem {
 public:
-    MovementSystem();
+    MovementSystem() = default;
     void process(const std::list<GameObject*>& gameObjects);
 private:
+    void processSnakeMovement(SnakeObject& snakeObject);
+    
     std::list<GameObject*> gameObjects;
 };

@@ -6,6 +6,9 @@
          contextName = "GameObject::addComponent(Component*):GameObject.cpp">
       </ContextState>
       <ContextState
+         contextName = "SnakeObject::SnakeObject(int, int):SnakeObject.cpp">
+      </ContextState>
+      <ContextState
          contextName = "RenderComponent* GameObject::getComponent&lt;RenderComponent&gt;() const:GameObject.hpp">
          <PersistentStrings>
             <PersistentString
@@ -14,7 +17,12 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "SnakeObject::SnakeObject(int, int):SnakeObject.cpp">
+         contextName = "InputComponent::handleEvent(SDL_Event const&amp;):InputComponent.hpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "event.caxis.axis">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>
