@@ -45,6 +45,8 @@
 		035DB9DF238B75D90025B2F7 /* GameObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
 		035DB9E2238B76AA0025B2F7 /* TransformComponent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TransformComponent.hpp; sourceTree = "<group>"; };
 		037280BD234F9A0D008472B1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		03830796243597E100F39FC0 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		03830797243597E100F39FC0 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		0389AD7F2396F4CA005EEC22 /* libSDL2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2.a; path = ../../../../../../../../usr/local/Cellar/sdl2/2.0.10/lib/libSDL2.a; sourceTree = "<group>"; };
 		039363CB2431980E006160D1 /* SnakeInputComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SnakeInputComponent.cpp; sourceTree = "<group>"; };
 		039363CC2431980E006160D1 /* SnakeInputComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SnakeInputComponent.hpp; sourceTree = "<group>"; };
@@ -112,6 +114,8 @@
 		039E6C0A234E30B0004CCD78 = {
 			isa = PBXGroup;
 			children = (
+				03830797243597E100F39FC0 /* .gitignore */,
+				03830796243597E100F39FC0 /* LICENSE */,
 				0389AD7E2396F4CA005EEC22 /* Frameworks */,
 				039E6C15234E30B0004CCD78 /* Snake */,
 				0317C67F2352500C00D43455 /* Snake */,
