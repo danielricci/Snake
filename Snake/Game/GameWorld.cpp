@@ -74,7 +74,15 @@ void GameWorld::run() {
     while(!isGameQuit) {
         SDL_Event event;
         while(SDL_PollEvent(&event) != 0) {
+
+            // Handle the quit event
+            if(event.type == SDL_QUIT) {
+                SDL_RemoveTimer(timerId);
+                isGameQuit = true;
+                break;
+            }
             
+            // Handle the speed of the snake. For now this is done through F1 (decrease) and F2 (increase) speed options
             if(event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_F1) {
                 int newSpeed = this->tickSpeed - 100;
                 if(newSpeed >= 100) {
@@ -88,28 +96,26 @@ void GameWorld::run() {
                 }
             }
             
-            switch(event.type) {
-                case SDL_QUIT: {
-                    SDL_RemoveTimer(timerId);
-                    isGameQuit = true;
-                    break;
-                }
-                case SDL_USEREVENT: {
-                    movementSystem->process(gameObjects);
-                    break;
-                }
-            }
-            
-            // Handle any inputs
+            // Process any inputs
             InputManager::getInstance()->process(event, getGameComponents<SnakeObject, InputComponent>());
+            
+            // Handle the user event
+            if(event.type == SDL_USEREVENT) {
+                // Movement System
+                movementSystem->process(gameObjects);
+                
+                // Clear the back buffer to prepare it for rendering
+                SDL_SetRenderDrawColor(&renderer, 0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE);
+                SDL_RenderClear(&renderer);
+                
+                // Render System
+                for(GameObject* gameObject : gameObjects) {
+                    renderSystem->update(renderer, gameObject);
+                }
+                
+                // Blit everything onto the display
+                SDL_RenderPresent(&renderer);
+            }
         }
-        
-        // Draw the contents of the game onto the screen
-        SDL_SetRenderDrawColor(&renderer, 0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE);
-        SDL_RenderClear(&renderer);
-        for(GameObject* gameObject : gameObjects) {
-            renderSystem->update(renderer, gameObject);
-        }
-        SDL_RenderPresent(&renderer);
     }
 }

@@ -8,7 +8,7 @@ SnakeInputComponent::SnakeInputComponent() {
 }
 
 void SnakeInputComponent::onMove(const SDL_Event& event) {
-    if(event.type == SDL_KEYUP) {
+    if(event.type == SDL_KEYDOWN) {
         switch(event.key.keysym.sym) {
             case SDLK_UP: {
                 if(positionVector.y() != 1) {
