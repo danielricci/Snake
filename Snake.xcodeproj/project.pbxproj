@@ -17,6 +17,7 @@
 		039E6C17234E30B0004CCD78 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 039E6C16234E30B0004CCD78 /* main.cpp */; };
 		03A1675B24190C320014CA0D /* SnakeObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03A1675924190C320014CA0D /* SnakeObject.cpp */; };
 		03A1675E241AA0B10014CA0D /* RenderSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03A1675C241AA0B10014CA0D /* RenderSystem.cpp */; };
+		03AC0514243A455500867CFF /* FoodObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03AC0512243A455500867CFF /* FoodObject.cpp */; };
 		03CEDEBB2434E718005CE12B /* MovementSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03CEDEB92434E718005CE12B /* MovementSystem.cpp */; };
 		03D811A52415E32500DAFD88 /* SnakeBodyComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03D811A32415E32500DAFD88 /* SnakeBodyComponent.cpp */; };
 		03EFD234237D004B006EF2A5 /* GameWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03EFD232237D004B006EF2A5 /* GameWorld.cpp */; };
@@ -58,6 +59,8 @@
 		03A1675A24190C320014CA0D /* SnakeObject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SnakeObject.hpp; sourceTree = "<group>"; };
 		03A1675C241AA0B10014CA0D /* RenderSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderSystem.cpp; sourceTree = "<group>"; };
 		03A1675D241AA0B10014CA0D /* RenderSystem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RenderSystem.hpp; sourceTree = "<group>"; };
+		03AC0512243A455500867CFF /* FoodObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FoodObject.cpp; sourceTree = "<group>"; };
+		03AC0513243A455500867CFF /* FoodObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FoodObject.hpp; sourceTree = "<group>"; };
 		03CEDEB92434E718005CE12B /* MovementSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MovementSystem.cpp; sourceTree = "<group>"; };
 		03CEDEBA2434E718005CE12B /* MovementSystem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MovementSystem.hpp; sourceTree = "<group>"; };
 		03D47C5E2381B00A0004A67B /* InputComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = InputComponent.hpp; sourceTree = "<group>"; };
@@ -161,6 +164,8 @@
 				03EFD237237E48D9006EF2A5 /* GameObject.hpp */,
 				03A1675924190C320014CA0D /* SnakeObject.cpp */,
 				03A1675A24190C320014CA0D /* SnakeObject.hpp */,
+				03AC0512243A455500867CFF /* FoodObject.cpp */,
+				03AC0513243A455500867CFF /* FoodObject.hpp */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -264,6 +269,7 @@
 				033905FB243789D50041A049 /* Circle.hpp in Sources */,
 				03A1675E241AA0B10014CA0D /* RenderSystem.cpp in Sources */,
 				03A1675B24190C320014CA0D /* SnakeObject.cpp in Sources */,
+				03AC0514243A455500867CFF /* FoodObject.cpp in Sources */,
 				0350F2B223A324FB0038A52E /* CollisionComponent.hpp in Sources */,
 				03219D472406B5F70050588A /* InputManager.cpp in Sources */,
 				035DB9E0238B75D90025B2F7 /* GameObject.cpp in Sources */,

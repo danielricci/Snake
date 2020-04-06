@@ -27,23 +27,29 @@
 #include "Game/Components/TransformComponent.hpp"
 #include "Game/Systems/RenderSystem.hpp"
 
-void RenderSystem::update(SDL_Renderer& renderer, GameObject* gameObject) {
-    if(gameObject != nullptr) {
-        RenderComponent* renderComponent = gameObject->getComponent<RenderComponent>();
-        if(renderComponent != nullptr && renderComponent->isVisible) {
-            SnakeBodyComponent* snakeBodyComponent = gameObject->getComponent<SnakeBodyComponent>();
-            if(snakeBodyComponent != nullptr) {
-                TransformComponent* gameObjectTransformComponent = gameObject->getComponent<TransformComponent>();
-                SDL_SetRenderDrawColor(&renderer, 0x00, 0xFF, 0x00, SDL_ALPHA_OPAQUE);
-                for(int i = 0; i < snakeBodyComponent->snakeBody.size(); ++i) {
-                    TransformComponent* snakeBodyTransform = snakeBodyComponent->snakeBody[i];
-                    SDL_Rect rectangle;
-                    rectangle.x = gameObjectTransformComponent->positionVector.x() + (snakeBodyTransform->positionVector.x() * snakeBodyTransform->dimensionVector.x());
-                    rectangle.y = gameObjectTransformComponent->positionVector.y() + (snakeBodyTransform->positionVector.y() * snakeBodyTransform->dimensionVector.y());
-                    rectangle.w = snakeBodyTransform->dimensionVector.x();
-                    rectangle.h = snakeBodyTransform->dimensionVector.y();
-                    
-                    SDL_RenderFillRect(&renderer, &rectangle);
+RenderSystem::RenderSystem(SDL_Renderer& renderer) : renderer(renderer) {
+}
+
+void RenderSystem::process(const std::list<GameObject*> gameObjects) {
+    this->gameObjects = gameObjects;
+    for(GameObject* gameObject : gameObjects) {
+        if(gameObject != nullptr) {
+            RenderComponent* renderComponent = gameObject->getComponent<RenderComponent>();
+            if(renderComponent != nullptr && renderComponent->isVisible) {
+                SnakeBodyComponent* snakeBodyComponent = gameObject->getComponent<SnakeBodyComponent>();
+                if(snakeBodyComponent != nullptr) {
+                    TransformComponent* gameObjectTransformComponent = gameObject->getComponent<TransformComponent>();
+                    SDL_SetRenderDrawColor(&renderer, 0x00, 0xFF, 0x00, SDL_ALPHA_OPAQUE);
+                    for(int i = 0; i < snakeBodyComponent->snakeBody.size(); ++i) {
+                        TransformComponent* snakeBodyTransform = snakeBodyComponent->snakeBody[i];
+                        SDL_Rect rectangle;
+                        rectangle.x = gameObjectTransformComponent->positionVector.x() + (snakeBodyTransform->positionVector.x() * snakeBodyTransform->dimensionVector.x());
+                        rectangle.y = gameObjectTransformComponent->positionVector.y() + (snakeBodyTransform->positionVector.y() * snakeBodyTransform->dimensionVector.y());
+                        rectangle.w = snakeBodyTransform->dimensionVector.x();
+                        rectangle.h = snakeBodyTransform->dimensionVector.y();
+    
+                        SDL_RenderFillRect(&renderer, &rectangle);
+                    }
                 }
             }
         }

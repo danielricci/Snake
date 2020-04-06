@@ -26,6 +26,8 @@
 
 #include <iostream>
 
+#include <SDL2_gfxPrimitives.h>
+
 GameWindow::GameWindow(const char* title, int width, int height) {
     std::cout << "Application Initializing" << std::endl;
     if(SDL_InitSubSystem(SDL_INIT_VIDEO) < 0) {

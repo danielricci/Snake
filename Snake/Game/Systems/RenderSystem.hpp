@@ -28,8 +28,13 @@
 
 #include <SDL.h>
 
+#include <list>
+
 class RenderSystem {
-    
 public:
-    void update(SDL_Renderer& renderer, GameObject* gameObject);
+    RenderSystem(SDL_Renderer& renderer);
+    void process(const std::list<GameObject*> gameObjects);
+private:
+    SDL_Renderer& renderer;
+    std::list<GameObject*> gameObjects;
 };

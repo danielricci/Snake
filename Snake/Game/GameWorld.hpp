@@ -79,6 +79,6 @@ private:
     std::list<GameObject*> gameObjects;
     
     SDL_Renderer& renderer;
-    RenderSystem* renderSystem =  new RenderSystem();
+    RenderSystem* renderSystem =  new RenderSystem(renderer);
     MovementSystem* movementSystem = new MovementSystem();
 };

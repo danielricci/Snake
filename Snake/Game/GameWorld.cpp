@@ -22,6 +22,7 @@
 * SOFTWARE.
 */
 
+#include "Game/GameObjects/FoodObject.hpp"
 #include "Game/GameObjects/SnakeObject.hpp"
 #include "Game/GameWorld.hpp"
 #include "Game/Managers/InputManager.hpp"
@@ -31,6 +32,7 @@
 GameWorld::GameWorld(SDL_Renderer& renderer) : renderer(renderer) {
     InputManager::getInstance();
     gameObjects.push_back(new SnakeObject(300, 300));
+    gameObjects.push_back(new FoodObject());
 }
 
 GameWorld::~GameWorld() {
@@ -109,9 +111,7 @@ void GameWorld::run() {
                 SDL_RenderClear(&renderer);
                 
                 // Render System
-                for(GameObject* gameObject : gameObjects) {
-                    renderSystem->update(renderer, gameObject);
-                }
+                renderSystem->process(gameObjects);
                 
                 // Blit everything onto the display
                 SDL_RenderPresent(&renderer);
