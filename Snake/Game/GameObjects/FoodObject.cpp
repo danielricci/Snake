@@ -25,6 +25,6 @@
 #include "Game/Components/RenderComponent.hpp"
 #include "Game/GameObjects/FoodObject.hpp"
 
-FoodObject::FoodObject() : GameObject(0, 0) {
+FoodObject::FoodObject(int x, int y, int width, int height) : GameObject(x, y, width, height) {
     this->addComponent(new RenderComponent());
 }

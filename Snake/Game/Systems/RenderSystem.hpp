@@ -24,7 +24,10 @@
 
 #pragma once
 
+#include "Game/Components/SnakeBodyComponent.hpp"
+#include "Game/GameObjects/FoodObject.hpp"
 #include "Game/GameObjects/GameObject.hpp"
+#include "Game/GameObjects/SnakeObject.hpp"
 
 #include <SDL.h>
 
@@ -35,6 +38,10 @@ public:
     RenderSystem(SDL_Renderer& renderer);
     void process(const std::list<GameObject*> gameObjects);
 private:
+    
+    void processSnakeRender(const SnakeObject& snakeObject);
+    void processFoodRender(const FoodObject& foodObject);
+    
     SDL_Renderer& renderer;
     std::list<GameObject*> gameObjects;
 };

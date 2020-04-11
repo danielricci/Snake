@@ -24,9 +24,9 @@
 
 #include "Game/Components/SnakeBodyComponent.hpp"
 
-SnakeBodyComponent::SnakeBodyComponent(int size) {
-    for(int i = 0; i < size; ++i) {
-        snakeBody.push_back(new TransformComponent(i, 0, WIDTH, HEIGHT));
+SnakeBodyComponent::SnakeBodyComponent() {
+    for(int i = 0; i < INITIAL_LENGTH; ++i) {
+        snakeBody.push_back(new TransformComponent(i, 0, CELL_HEIGHT, CELL_WIDTH));
     }
 }
 

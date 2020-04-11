@@ -36,22 +36,38 @@ void RenderSystem::process(const std::list<GameObject*> gameObjects) {
         if(gameObject != nullptr) {
             RenderComponent* renderComponent = gameObject->getComponent<RenderComponent>();
             if(renderComponent != nullptr && renderComponent->isVisible) {
-                SnakeBodyComponent* snakeBodyComponent = gameObject->getComponent<SnakeBodyComponent>();
-                if(snakeBodyComponent != nullptr) {
-                    TransformComponent* gameObjectTransformComponent = gameObject->getComponent<TransformComponent>();
-                    SDL_SetRenderDrawColor(&renderer, 0x00, 0xFF, 0x00, SDL_ALPHA_OPAQUE);
-                    for(int i = 0; i < snakeBodyComponent->snakeBody.size(); ++i) {
-                        TransformComponent* snakeBodyTransform = snakeBodyComponent->snakeBody[i];
-                        SDL_Rect rectangle;
-                        rectangle.x = gameObjectTransformComponent->positionVector.x() + (snakeBodyTransform->positionVector.x() * snakeBodyTransform->dimensionVector.x());
-                        rectangle.y = gameObjectTransformComponent->positionVector.y() + (snakeBodyTransform->positionVector.y() * snakeBodyTransform->dimensionVector.y());
-                        rectangle.w = snakeBodyTransform->dimensionVector.x();
-                        rectangle.h = snakeBodyTransform->dimensionVector.y();
-    
-                        SDL_RenderFillRect(&renderer, &rectangle);
+                SnakeObject* snakeObject = dynamic_cast<SnakeObject*>(gameObject);
+                if(snakeObject != nullptr) {
+                    processSnakeRender(*snakeObject);
+                }
+                else {
+                    FoodObject* foodObject = dynamic_cast<FoodObject*>(gameObject);
+                    if(foodObject != nullptr) {
+                        processFoodRender(*foodObject);
                     }
                 }
             }
         }
     }
+}
+
+void RenderSystem::processSnakeRender(const SnakeObject& snakeObject) {
+    TransformComponent* snakeTransformComponent = snakeObject.getComponent<TransformComponent>();
+    SnakeBodyComponent* snakeBodyComponent = snakeObject.getComponent<SnakeBodyComponent>();
+    SDL_SetRenderDrawColor(&renderer, 0x00, 0xFF, 0x00, SDL_ALPHA_OPAQUE);
+    for(int i = 0; i < snakeBodyComponent->snakeBody.size(); ++i) {
+        TransformComponent* snakeBodyTransform = snakeBodyComponent->snakeBody[i];
+        SDL_Rect rectangle;
+        rectangle.x = snakeTransformComponent->positionVector.x() + (snakeBodyTransform->positionVector.x() * snakeBodyTransform->dimensionVector.x());
+        rectangle.y = snakeTransformComponent->positionVector.y() + (snakeBodyTransform->positionVector.y() * snakeBodyTransform->dimensionVector.y());
+        rectangle.w = snakeBodyTransform->dimensionVector.x();
+        rectangle.h = snakeBodyTransform->dimensionVector.y();
+
+        SDL_RenderFillRect(&renderer, &rectangle);
+    }
+}
+
+void RenderSystem::processFoodRender(const FoodObject& foodObject) {
+    SDL_Rect rectangle = foodObject.getComponent<TransformComponent>()->getRectangle();
+    SDL_RenderFillRect(&renderer, &rectangle);
 }

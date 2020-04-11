@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		03219D472406B5F70050588A /* InputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03219D452406B5F70050588A /* InputManager.cpp */; };
 		0322201B2380FF9D004B0BD1 /* GameWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 032220192380FF9D004B0BD1 /* GameWindow.cpp */; };
-		033905FB243789D50041A049 /* Circle.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 033905FA243789D50041A049 /* Circle.hpp */; };
 		0350F2B223A324FB0038A52E /* CollisionComponent.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 0350F2B123A324FB0038A52E /* CollisionComponent.hpp */; };
 		035DB9E0238B75D90025B2F7 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 035DB9DF238B75D90025B2F7 /* GameObject.cpp */; };
 		0389AD802396F4CA005EEC22 /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0389AD7F2396F4CA005EEC22 /* libSDL2.a */; };
@@ -36,13 +35,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		030A2389236F05D8000D0E2F /* Rectangle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Rectangle.hpp; sourceTree = "<group>"; };
 		0317C67F2352500C00D43455 /* Snake */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Snake; sourceTree = BUILT_PRODUCTS_DIR; };
 		03219D452406B5F70050588A /* InputManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = InputManager.cpp; sourceTree = "<group>"; };
 		03219D462406B5F70050588A /* InputManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = InputManager.hpp; sourceTree = "<group>"; };
 		032220192380FF9D004B0BD1 /* GameWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameWindow.cpp; sourceTree = "<group>"; };
 		0322201A2380FF9D004B0BD1 /* GameWindow.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameWindow.hpp; sourceTree = "<group>"; };
-		033905FA243789D50041A049 /* Circle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Circle.hpp; sourceTree = "<group>"; };
 		0350F2B123A324FB0038A52E /* CollisionComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CollisionComponent.hpp; sourceTree = "<group>"; };
 		035DB9DD238B73EF0025B2F7 /* Component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Component.hpp; sourceTree = "<group>"; };
 		035DB9DF238B75D90025B2F7 /* GameObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
@@ -102,7 +99,6 @@
 				03EFD232237D004B006EF2A5 /* GameWorld.cpp */,
 				03EFD233237D004B006EF2A5 /* GameWorld.hpp */,
 				03219D442406B07A0050588A /* Managers */,
-				03A78AFF23845F0000856F98 /* Primitives */,
 				03EBAAAD23918F4900F8BDE5 /* Systems */,
 			);
 			path = Game;
@@ -135,15 +131,6 @@
 				039E6C16234E30B0004CCD78 /* main.cpp */,
 			);
 			path = Snake;
-			sourceTree = "<group>";
-		};
-		03A78AFF23845F0000856F98 /* Primitives */ = {
-			isa = PBXGroup;
-			children = (
-				030A2389236F05D8000D0E2F /* Rectangle.hpp */,
-				033905FA243789D50041A049 /* Circle.hpp */,
-			);
-			path = Primitives;
 			sourceTree = "<group>";
 		};
 		03EBAAAD23918F4900F8BDE5 /* Systems */ = {
@@ -266,7 +253,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				03CEDEBB2434E718005CE12B /* MovementSystem.cpp in Sources */,
-				033905FB243789D50041A049 /* Circle.hpp in Sources */,
 				03A1675E241AA0B10014CA0D /* RenderSystem.cpp in Sources */,
 				03A1675B24190C320014CA0D /* SnakeObject.cpp in Sources */,
 				03AC0514243A455500867CFF /* FoodObject.cpp in Sources */,
@@ -414,7 +400,6 @@
 					/usr/local/Cellar/sdl2/2.0.12_1/lib,
 					/usr/local/Cellar/sdl2_ttf/2.0.15/lib,
 					/usr/local/Cellar/sdl2_mixer/2.0.4/lib,
-					/usr/local/Cellar/sdl2_gfx/1.0.4/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -444,7 +429,6 @@
 					/usr/local/Cellar/sdl2/2.0.12_1/lib,
 					/usr/local/Cellar/sdl2_ttf/2.0.15/lib,
 					/usr/local/Cellar/sdl2_mixer/2.0.4/lib,
-					/usr/local/Cellar/sdl2_gfx/1.0.4/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

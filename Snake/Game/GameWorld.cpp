@@ -27,12 +27,18 @@
 #include "Game/GameWorld.hpp"
 #include "Game/Managers/InputManager.hpp"
 
-#include <iostream>
-
 GameWorld::GameWorld(SDL_Renderer& renderer) : renderer(renderer) {
+    // TODO initialization should be done better than this...
     InputManager::getInstance();
-    gameObjects.push_back(new SnakeObject(300, 300));
-    gameObjects.push_back(new FoodObject());
+
+    // Create the Snake Object
+    SnakeObject* snakeObject = new SnakeObject(300, 300);
+    gameObjects.push_back(snakeObject);
+    
+    // Create the Food Object
+    Eigen::Vector2i unitSize = snakeObject->getComponent<SnakeBodyComponent>()->getUnitSize();
+    FoodObject* foodObject = new FoodObject(30, 30, unitSize.x(), unitSize.y());
+    gameObjects.push_back(foodObject);
 }
 
 GameWorld::~GameWorld() {

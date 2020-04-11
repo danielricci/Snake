@@ -26,6 +26,8 @@
 
 #include "Game/GameObjects/GameObject.hpp"
 
+#include <Eigen/Dense>
+
 class SnakeObject : public GameObject {
 public:
     SnakeObject(int x, int y);

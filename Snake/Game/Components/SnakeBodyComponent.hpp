@@ -31,11 +31,15 @@
 
 class SnakeBodyComponent : public Component {
 public:
-    SnakeBodyComponent(int size);
+    SnakeBodyComponent();
     virtual ~SnakeBodyComponent();
+    
+    inline Eigen::Vector2i getUnitSize() const { return Eigen::Vector2i(CELL_WIDTH, CELL_HEIGHT); }
+    inline std::deque<TransformComponent*>::size_type getLength() const { return snakeBody.size(); }
     
     std::deque<TransformComponent*> snakeBody;
 private:
-    const int HEIGHT = 9;
-    const int WIDTH = 9;
+    const int CELL_WIDTH = 9;
+    const int CELL_HEIGHT = 9;
+    const int INITIAL_LENGTH = 12;
 };

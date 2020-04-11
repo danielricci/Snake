@@ -40,7 +40,7 @@ public:
         this->dimensionVector.y() = height;
     }
         
-    SDL_Rect rectangle() const {
+    SDL_Rect getRectangle() const {
         SDL_Rect rectangle;
         rectangle.x = positionVector.x();
         rectangle.y = positionVector.y();
