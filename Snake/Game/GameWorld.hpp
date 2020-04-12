@@ -74,7 +74,7 @@ private:
         return components;
     }
     
-    int tickSpeed = 1000;
+    int tickSpeed = 100;
     
     std::list<GameObject*> gameObjects;
     

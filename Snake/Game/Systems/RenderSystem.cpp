@@ -68,6 +68,7 @@ void RenderSystem::processSnakeRender(const SnakeObject& snakeObject) {
 }
 
 void RenderSystem::processFoodRender(const FoodObject& foodObject) {
+    SDL_SetRenderDrawColor(&renderer, 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE);
     SDL_Rect rectangle = foodObject.getComponent<TransformComponent>()->getRectangle();
     SDL_RenderFillRect(&renderer, &rectangle);
 }
