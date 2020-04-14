@@ -6,7 +6,7 @@
 
 class SnakeInputComponent : public InputComponent {
 public:
-    SnakeInputComponent();
+    SnakeInputComponent(GameObject* gameObject);
     inline Eigen::Vector2f getPositionVector() const {
         return positionVector;
     }

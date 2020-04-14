@@ -34,7 +34,8 @@
 class InputComponent : public Component {
 
 public:
-    InputComponent() = default;
+    InputComponent(GameObject* gameObject) : Component(gameObject) {
+    }
     
     void addBinding(SDL_Keycode keyCode, const std::string& action) {
         inputBindings.emplace(keyCode, action);

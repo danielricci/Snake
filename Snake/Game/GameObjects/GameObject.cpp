@@ -26,7 +26,7 @@
 #include "Game/GameObjects/GameObject.hpp"
 
 GameObject::GameObject(int x, int y, int width, int height) {
-    this->addComponent(new TransformComponent(x, y, width, height));
+    this->addComponent(new TransformComponent(this, x, y, width, height));
 }
 
 GameObject::~GameObject() {

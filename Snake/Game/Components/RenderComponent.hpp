@@ -28,5 +28,8 @@
 
 class RenderComponent : public Component {
 public:
+    RenderComponent(GameObject* gameObject) : Component(gameObject) {
+    }
+    
     bool isVisible { true };
 };

@@ -24,7 +24,11 @@
 
 #pragma once
 
+#include "Game/GameObjects/GameObject.hpp"
+
 #include <list>
+
+class GameObject;
 
 class Component {
 public:
@@ -55,7 +59,13 @@ public:
     
     bool isEnabled = true;
 protected:
-    Component() = default;
+    Component(GameObject* gameObject) {
+        this->gameObject = gameObject;
+    }
+    
+    inline GameObject* getGameObject() const { return this->gameObject; }
+    
 private:
+    GameObject* gameObject = nullptr;
     std::list<Component*> components;
 };

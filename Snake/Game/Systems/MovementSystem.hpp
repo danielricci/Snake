@@ -35,6 +35,7 @@ class MovementSystem {
 public:
     void process(const std::list<GameObject*>& gameObjects);
 private:
+    void processSnakeCollision(const SnakeObject& snakeObject);
     void processSnakeMovement(SnakeObject& snakeObject);
     
     std::list<GameObject*> gameObjects;

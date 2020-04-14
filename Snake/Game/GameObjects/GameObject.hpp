@@ -28,6 +28,8 @@
 
 #include <list>
 
+class Component;
+
 class GameObject {
 public:
     virtual ~GameObject();

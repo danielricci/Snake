@@ -25,12 +25,20 @@
 #pragma once
 
 #include "Game/Components/Component.hpp"
+#include "Game/Components/TransformComponent.hpp"
+#include "Game/GameObjects/GameObject.hpp"
 
 #include <SDL.h>
 
 class CollisionComponent : public Component {
 public:
-    bool isCollidedAABB(const SDL_Rect& r1, const SDL_Rect& r2) const {
+    bool isCollidedAABB(const GameObject& gameObject) const {
+        TransformComponent* firstTransformComponent = this->getGameObject()->getComponent<TransformComponent>();
+        TransformComponent* secondTransformComponent = gameObject.getComponent<TransformComponent>();
+        return isCollidedAABBImpl(firstTransformComponent->getRectangle(), secondTransformComponent->getRectangle());
+    }
+private:
+    bool isCollidedAABBImpl(const SDL_Rect& r1, const SDL_Rect& r2) const {
         if(r1.x - (r2.x + r2.w) > 0 || r2.x - (r1.x + r1.w) > 0) {
             return false;
         }

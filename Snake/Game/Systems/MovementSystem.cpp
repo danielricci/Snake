@@ -22,6 +22,7 @@
 * SOFTWARE.
 */
 
+#include "Game/Components/CollisionComponent.hpp"
 #include "Game/Components/SnakeBodyComponent.hpp"
 #include "Game/Components/SnakeInputComponent.hpp"
 #include "Game/Systems/MovementSystem.hpp"
@@ -40,6 +41,17 @@ void MovementSystem::process(const std::list<GameObject*>& gameObjects) {
     }
     this->gameObjects.empty();
 }
+
+//void MovementSystem::processSnakeCollision(const SnakeObject& snakeObject) {
+//    for(GameObject* gameObject : this->gameObjects) {
+//        if(gameObject != &snakeObject) {
+//            CollisionComponent* collisionComponent = gameObject->getComponent<CollisionComponent>();
+//            if(collisionComponent != nullptr && collisionComponent->isCollidedAABB(snakeObject)) {
+//                
+//            }
+//        }
+//    }
+//}
 
 void MovementSystem::processSnakeMovement(SnakeObject& snakeObject) {
     SnakeInputComponent* snakeInputComponent = snakeObject.getComponent<SnakeInputComponent>();

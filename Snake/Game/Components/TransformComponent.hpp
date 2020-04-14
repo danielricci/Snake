@@ -31,9 +31,10 @@
 
 class TransformComponent : public Component {
 public:
-    TransformComponent() = default;
+    TransformComponent(GameObject* gameObject) : Component(gameObject) {
+    }
     
-    TransformComponent(int x, int y, int width, int height) {
+    TransformComponent(GameObject* gameObject, int x, int y, int width, int height) : TransformComponent(gameObject) {
         this->positionVector.x() = x;
         this->positionVector.y() = y;
         this->dimensionVector.x() = width;

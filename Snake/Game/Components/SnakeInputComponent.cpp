@@ -1,6 +1,6 @@
 #include "Game/Components/SnakeInputComponent.hpp"
 
-SnakeInputComponent::SnakeInputComponent() {
+SnakeInputComponent::SnakeInputComponent(GameObject* gameObject) : InputComponent(gameObject) {
     this->addBinding(SDLK_UP, ACTION_MOVE, std::bind(&SnakeInputComponent::onMove, this, std::placeholders::_1));
     this->addBinding(SDLK_LEFT, ACTION_MOVE, std::bind(&SnakeInputComponent::onMove, this, std::placeholders::_1));
     this->addBinding(SDLK_DOWN, ACTION_MOVE, std::bind(&SnakeInputComponent::onMove, this, std::placeholders::_1));

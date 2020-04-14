@@ -31,7 +31,7 @@
 
 class SnakeBodyComponent : public Component {
 public:
-    SnakeBodyComponent();
+    SnakeBodyComponent(GameObject* gameObject);
     virtual ~SnakeBodyComponent();
     
     inline Eigen::Vector2i getUnitSize() const { return Eigen::Vector2i(CELL_WIDTH, CELL_HEIGHT); }
