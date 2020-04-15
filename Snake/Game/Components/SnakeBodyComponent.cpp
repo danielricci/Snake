@@ -26,7 +26,7 @@
 
 SnakeBodyComponent::SnakeBodyComponent(GameObject* gameObject) : Component(gameObject) {
     for(int i = 0; i < INITIAL_LENGTH; ++i) {
-        snakeBody.push_back(new TransformComponent(gameObject, i, 0, CELL_HEIGHT, CELL_WIDTH));
+        snakeBody.push_back(new TransformComponent(gameObject, i * CELL_WIDTH, 0, CELL_HEIGHT, CELL_WIDTH));
     }
 }
 

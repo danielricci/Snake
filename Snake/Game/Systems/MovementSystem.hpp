@@ -24,6 +24,7 @@
 
 #pragma once
 
+#include "Game/GameObjects/FoodObject.hpp"
 #include "Game/GameObjects/GameObject.hpp"
 #include "Game/GameObjects/SnakeObject.hpp"
 
@@ -33,10 +34,5 @@
 
 class MovementSystem {
 public:
-    void process(const std::list<GameObject*>& gameObjects);
-private:
-    void processSnakeCollision(const SnakeObject& snakeObject);
-    void processSnakeMovement(SnakeObject& snakeObject);
-    
-    std::list<GameObject*> gameObjects;
+    void process(SnakeObject* snakeObject, FoodObject* foodObject);
 };

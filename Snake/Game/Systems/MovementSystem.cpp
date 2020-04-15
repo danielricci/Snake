@@ -29,17 +29,30 @@
 
 #include <Eigen/Dense>
 
-void MovementSystem::process(const std::list<GameObject*>& gameObjects) {
-    this->gameObjects = gameObjects;
-    for(GameObject* gameObject : gameObjects) {
-        if(gameObject != nullptr) {
-            SnakeObject* snakeObject = dynamic_cast<SnakeObject*>(gameObject);
-            if(snakeObject != nullptr) {
-                processSnakeMovement(*snakeObject);
+#include <iostream>
+
+void MovementSystem::process(SnakeObject* snakeObject, FoodObject* foodObject) {
+    if(snakeObject != nullptr && foodObject != nullptr) {
+        SnakeInputComponent* snakeInputComponent = snakeObject->getComponent<SnakeInputComponent>();
+        if(snakeInputComponent != nullptr) {
+            SnakeBodyComponent* snakeBodyComponent = snakeObject->getComponent<SnakeBodyComponent>();
+            if(snakeBodyComponent != nullptr) {
+                // Get a reference to the current last component
+                TransformComponent* lastComponent = snakeBodyComponent->snakeBody.back();
+                
+                // Update the first element with a new set of coordinates
+                snakeBodyComponent->snakeBody.front()->positionVector = snakeInputComponent->getPositionVector() + lastComponent->positionVector;
+                
+                // Move the front element to the end of the list
+                snakeBodyComponent->snakeBody.push_back(snakeBodyComponent->snakeBody.front());
+                snakeBodyComponent->snakeBody.pop_front();
+                
+                if(snakeBodyComponent->getHead()->positionVector == foodObject->getComponent<TransformComponent>()->positionVector) {
+                    std::cout << "HIT!" << std::endl;
+                }
             }
         }
     }
-    this->gameObjects.empty();
 }
 
 //void MovementSystem::processSnakeCollision(const SnakeObject& snakeObject) {
@@ -47,26 +60,8 @@ void MovementSystem::process(const std::list<GameObject*>& gameObjects) {
 //        if(gameObject != &snakeObject) {
 //            CollisionComponent* collisionComponent = gameObject->getComponent<CollisionComponent>();
 //            if(collisionComponent != nullptr && collisionComponent->isCollidedAABB(snakeObject)) {
-//                
+//
 //            }
 //        }
 //    }
 //}
-
-void MovementSystem::processSnakeMovement(SnakeObject& snakeObject) {
-    SnakeInputComponent* snakeInputComponent = snakeObject.getComponent<SnakeInputComponent>();
-    if(snakeInputComponent != nullptr) {
-        SnakeBodyComponent* snakeBodyComponent = snakeObject.getComponent<SnakeBodyComponent>();
-        if(snakeBodyComponent != nullptr) {
-            // Get a reference to the current last component
-            TransformComponent* lastComponent = snakeBodyComponent->snakeBody.back();
-            
-            // Update the first element with a new set of coordinates
-            snakeBodyComponent->snakeBody.front()->positionVector = snakeInputComponent->getPositionVector() + lastComponent->positionVector;
-            
-            // Move the front element to the end of the list
-            snakeBodyComponent->snakeBody.push_back(snakeBodyComponent->snakeBody.front());
-            snakeBodyComponent->snakeBody.pop_front();
-        }
-    }
-}

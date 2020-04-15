@@ -110,7 +110,7 @@ void GameWorld::run() {
             // Handle the user event
             if(event.type == SDL_USEREVENT) {
                 // Movement System
-                movementSystem->process(gameObjects);
+                movementSystem->process(this->getGameObject<SnakeObject>(), this->getGameObject<FoodObject>());
                 
                 // Clear the back buffer to prepare it for rendering
                 SDL_SetRenderDrawColor(&renderer, 0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE);
