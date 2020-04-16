@@ -29,8 +29,6 @@
 
 #include <Eigen/Dense>
 
-#include <iostream>
-
 MovementSystem::MovementSystem(int width, int height) : width(width), height(height) {
 }
 

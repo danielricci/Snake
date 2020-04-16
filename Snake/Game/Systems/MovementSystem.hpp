@@ -28,8 +28,6 @@
 #include "Game/GameObjects/GameObject.hpp"
 #include "Game/GameObjects/SnakeObject.hpp"
 
-#include <SDL.h>
-
 #include <list>
 
 class MovementSystem {
