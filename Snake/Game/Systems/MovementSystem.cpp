@@ -45,9 +45,19 @@ void MovementSystem::process(SnakeObject* snakeObject, FoodObject* foodObject) {
                 snakeBodyComponent->snakeBody.push_back(snakeBodyComponent->snakeBody.front());
                 snakeBodyComponent->snakeBody.pop_front();
                 
-                // Verify if there is a collision with the head and the food
+                // Test for collision with food
                 if(snakeBodyComponent->snakeBody.back()->getWorldPositionVector() == foodObject->getComponent<TransformComponent>()->positionVector) {
-                    std::cout << "Hit!!!" << std::endl;
+                    
+                }
+                else if(snakeBodyComponent->snakeBody.size() > 1) {
+                    // Test for collision with the snake body
+                    // Note: Loop requires condition that there be at least 2 elements
+                    Eigen::Vector2f headWorldPosition = snakeBodyComponent->snakeBody.back()->getWorldPositionVector();
+                    for(int i = 0; i < snakeBodyComponent->snakeBody.size() - 1; ++i) {
+                        if(snakeBodyComponent->snakeBody[i]->getWorldPositionVector() == headWorldPosition) {
+                            break;
+                        }
+                    }
                 }
             }
         }
