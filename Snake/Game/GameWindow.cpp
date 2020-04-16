@@ -47,7 +47,7 @@ GameWindow::GameWindow(const char* title, int width, int height) {
         return;
     }
 
-    world = new GameWorld(*renderer);
+    world = new GameWorld(*window, *renderer);
     ready = true;
 }
 

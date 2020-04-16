@@ -27,10 +27,17 @@
 #include "Game/GameWorld.hpp"
 #include "Game/Managers/InputManager.hpp"
 
-GameWorld::GameWorld(SDL_Renderer& renderer) : renderer(renderer) {
+GameWorld::GameWorld(SDL_Window& window, SDL_Renderer& renderer) : renderer(renderer) {
     // TODO initialization should be done better than this...
     InputManager::getInstance();
 
+    renderSystem = new RenderSystem(renderer);
+    
+    int width = 0;
+    int height = 0;
+    SDL_GetWindowSize(&window, &width, &height);
+    movementSystem = new MovementSystem(width, height);
+    
     // Create the Snake Object
     SnakeObject* snakeObject = new SnakeObject(300, 300);
     gameObjects.push_back(snakeObject);

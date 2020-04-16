@@ -34,7 +34,7 @@
 
 class GameWorld {
 public:
-    GameWorld(SDL_Renderer& renderer);
+    GameWorld(SDL_Window& window, SDL_Renderer& renderer);
     ~GameWorld();
     
     void run();
@@ -79,6 +79,7 @@ private:
     std::list<GameObject*> gameObjects;
     
     SDL_Renderer& renderer;
-    RenderSystem* renderSystem =  new RenderSystem(renderer);
-    MovementSystem* movementSystem = new MovementSystem();
+    
+    RenderSystem* renderSystem =  nullptr;
+    MovementSystem* movementSystem = nullptr;
 };
