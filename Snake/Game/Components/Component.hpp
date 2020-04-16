@@ -57,14 +57,13 @@ public:
         return component;
     }
     
+    inline GameObject* getGameObject() const { return this->gameObject; }
+    
     bool isEnabled = true;
 protected:
     Component(GameObject* gameObject) {
         this->gameObject = gameObject;
     }
-    
-    inline GameObject* getGameObject() const { return this->gameObject; }
-    
 private:
     GameObject* gameObject = nullptr;
     std::list<Component*> components;

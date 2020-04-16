@@ -38,6 +38,10 @@ void MovementSystem::process(SnakeObject* snakeObject, FoodObject* foodObject) {
         if(snakeInputComponent != nullptr) {
             SnakeBodyComponent* snakeBodyComponent = snakeObject->getComponent<SnakeBodyComponent>();
             if(snakeBodyComponent != nullptr) {
+                
+                // Hold onto a reference of the front of the snake. If there is a collision with food then put a new transform here
+                SDL_Rect snakeBodyFront = snakeBodyComponent->snakeBody.front()->getRectangle();
+                
                 // Update the position of whats at the front with whats at the back plus the offset based on the current input
                 snakeBodyComponent->snakeBody.front()->positionVector.x() = snakeBodyComponent->snakeBody.back()->positionVector.x() + (snakeInputComponent->getDirectionVector().x() * snakeBodyComponent->snakeBody.back()->dimensionVector.x());
                 snakeBodyComponent->snakeBody.front()->positionVector.y() = snakeBodyComponent->snakeBody.back()->positionVector.y() + (snakeInputComponent->getDirectionVector().y() * snakeBodyComponent->snakeBody.back()->dimensionVector.y());
@@ -50,11 +54,11 @@ void MovementSystem::process(SnakeObject* snakeObject, FoodObject* foodObject) {
                 TransformComponent* headSnake = snakeBodyComponent->snakeBody.back();
                 Eigen::Vector2f headSnakeWorldPosition = headSnake->getWorldPositionVector();
                 if(headSnakeWorldPosition.x() <= 0 || headSnakeWorldPosition.y() <= 0 || headSnakeWorldPosition.x() >= width || headSnakeWorldPosition.y() >= height) {
-
+                    
                 }
                 // Test for collision with food
                 else if(snakeBodyComponent->snakeBody.back()->getWorldPositionVector() == foodObject->getComponent<TransformComponent>()->positionVector) {
-                    
+                    snakeBodyComponent->snakeBody.push_front(new TransformComponent(snakeBodyComponent->getGameObject(), snakeBodyFront.x, snakeBodyFront.y, snakeBodyFront.w, snakeBodyFront.h));
                 }
                 // Test for collision with the snake body
                 else if(snakeBodyComponent->snakeBody.size() > 1) {
