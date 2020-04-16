@@ -37,31 +37,19 @@ void MovementSystem::process(SnakeObject* snakeObject, FoodObject* foodObject) {
         if(snakeInputComponent != nullptr) {
             SnakeBodyComponent* snakeBodyComponent = snakeObject->getComponent<SnakeBodyComponent>();
             if(snakeBodyComponent != nullptr) {
-                // Get a reference to the current last component
-                TransformComponent* lastComponent = snakeBodyComponent->snakeBody.back();
+                // Update the position of whats at the front with whats at the back plus the offset based on the current input
+                snakeBodyComponent->snakeBody.front()->positionVector.x() = snakeBodyComponent->snakeBody.back()->positionVector.x() + (snakeInputComponent->getDirectionVector().x() * snakeBodyComponent->snakeBody.back()->dimensionVector.x());
+                snakeBodyComponent->snakeBody.front()->positionVector.y() = snakeBodyComponent->snakeBody.back()->positionVector.y() + (snakeInputComponent->getDirectionVector().y() * snakeBodyComponent->snakeBody.back()->dimensionVector.y());
                 
-                // Update the first element with a new set of coordinates
-                snakeBodyComponent->snakeBody.front()->positionVector = snakeInputComponent->getPositionVector() + lastComponent->positionVector;
-                
-                // Move the front element to the end of the list
+                // Position the front element to the back
                 snakeBodyComponent->snakeBody.push_back(snakeBodyComponent->snakeBody.front());
                 snakeBodyComponent->snakeBody.pop_front();
                 
-                if(snakeBodyComponent->getHead()->positionVector == foodObject->getComponent<TransformComponent>()->positionVector) {
-                    std::cout << "HIT!" << std::endl;
+                // Verify if there is a collision with the head and the food
+                if(snakeBodyComponent->snakeBody.back()->getWorldPositionVector() == foodObject->getComponent<TransformComponent>()->positionVector) {
+                    std::cout << "Hit!!!" << std::endl;
                 }
             }
         }
     }
 }
-
-//void MovementSystem::processSnakeCollision(const SnakeObject& snakeObject) {
-//    for(GameObject* gameObject : this->gameObjects) {
-//        if(gameObject != &snakeObject) {
-//            CollisionComponent* collisionComponent = gameObject->getComponent<CollisionComponent>();
-//            if(collisionComponent != nullptr && collisionComponent->isCollidedAABB(snakeObject)) {
-//
-//            }
-//        }
-//    }
-//}

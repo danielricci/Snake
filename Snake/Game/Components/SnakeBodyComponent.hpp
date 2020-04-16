@@ -36,7 +36,6 @@ public:
     
     inline Eigen::Vector2i getUnitSize() const { return Eigen::Vector2i(CELL_WIDTH, CELL_HEIGHT); }
     inline std::deque<TransformComponent*>::size_type getLength() const { return snakeBody.size(); }
-    inline TransformComponent* getHead() const { return this->snakeBody.back(); }
     
     std::deque<TransformComponent*> snakeBody;
 private:

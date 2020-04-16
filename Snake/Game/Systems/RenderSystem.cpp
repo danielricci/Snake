@@ -52,17 +52,17 @@ void RenderSystem::process(const std::list<GameObject*> gameObjects) {
 }
 
 void RenderSystem::processSnakeRender(const SnakeObject& snakeObject) {
-    TransformComponent* snakeTransformComponent = snakeObject.getComponent<TransformComponent>();
-    SnakeBodyComponent* snakeBodyComponent = snakeObject.getComponent<SnakeBodyComponent>();
     SDL_SetRenderDrawColor(&renderer, 0x00, 0xFF, 0x00, SDL_ALPHA_OPAQUE);
+    
+    SnakeBodyComponent* snakeBodyComponent = snakeObject.getComponent<SnakeBodyComponent>();
     for(int i = 0; i < snakeBodyComponent->snakeBody.size(); ++i) {
         TransformComponent* snakeBodyTransform = snakeBodyComponent->snakeBody[i];
+        Eigen::Vector2f worldPosition = snakeBodyTransform->getWorldPositionVector();
         SDL_Rect rectangle;
-        rectangle.x = snakeTransformComponent->positionVector.x() + (snakeBodyTransform->positionVector.x() * snakeBodyTransform->dimensionVector.x());
-        rectangle.y = snakeTransformComponent->positionVector.y() + (snakeBodyTransform->positionVector.y() * snakeBodyTransform->dimensionVector.y());
+        rectangle.x = worldPosition.x();
+        rectangle.y = worldPosition.y();
         rectangle.w = snakeBodyTransform->dimensionVector.x();
         rectangle.h = snakeBodyTransform->dimensionVector.y();
-
         SDL_RenderFillRect(&renderer, &rectangle);
     }
 }
