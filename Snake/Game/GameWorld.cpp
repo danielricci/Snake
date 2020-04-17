@@ -39,12 +39,12 @@ GameWorld::GameWorld(SDL_Window& window, SDL_Renderer& renderer) : renderer(rend
     movementSystem = new MovementSystem(width, height);
     
     // Create the Snake Object
-    SnakeObject* snakeObject = new SnakeObject(300, 300);
+    SnakeObject* snakeObject = new SnakeObject(306, 306);
     gameObjects.push_back(snakeObject);
     
     // Create the Food Object
     Eigen::Vector2i unitSize = snakeObject->getComponent<SnakeBodyComponent>()->getUnitSize();
-    FoodObject* foodObject = new FoodObject(30, 30, unitSize.x(), unitSize.y());
+    FoodObject* foodObject = new FoodObject(72, 72, unitSize.x(), unitSize.y());
     gameObjects.push_back(foodObject);
 }
 

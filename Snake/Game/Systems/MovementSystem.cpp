@@ -29,6 +29,12 @@
 
 #include <Eigen/Dense>
 
+#include <algorithm>
+#include <iostream>
+#include <numeric>
+#include <random>
+#include <vector>
+
 MovementSystem::MovementSystem(int width, int height) : width(width), height(height) {
 }
 
@@ -53,12 +59,46 @@ void MovementSystem::process(SnakeObject* snakeObject, FoodObject* foodObject) {
                 // Test for collision with the outside of the game bounds
                 TransformComponent* headSnake = snakeBodyComponent->snakeBody.back();
                 Eigen::Vector2f headSnakeWorldPosition = headSnake->getWorldPositionVector();
-                if(headSnakeWorldPosition.x() <= 0 || headSnakeWorldPosition.y() <= 0 || headSnakeWorldPosition.x() >= width || headSnakeWorldPosition.y() >= height) {
+                if(headSnakeWorldPosition.x() < 0 || headSnakeWorldPosition.y() < 0 || headSnakeWorldPosition.x() >= width || headSnakeWorldPosition.y() >= height) {
                     
                 }
                 // Test for collision with food
                 else if(snakeBodyComponent->snakeBody.back()->getWorldPositionVector() == foodObject->getComponent<TransformComponent>()->positionVector) {
                     snakeBodyComponent->snakeBody.push_front(new TransformComponent(snakeBodyComponent->getGameObject(), snakeBodyFront.x, snakeBodyFront.y, snakeBodyFront.w, snakeBodyFront.h));
+                    
+                    // Create the lists to hold all valid horizontal and vertical locations
+                    std::vector<int> horizontalLocations;
+                    std::vector<int> verticalLocations;
+                    
+                    // Fill both lists with values start at origin (0,0) outwards to width and downwards to height
+                    Eigen::Vector2i unitSize = snakeBodyComponent->getUnitSize();
+                    for(int i = 0; i < width; i += unitSize.x()) {
+                        horizontalLocations.push_back(i);
+                    }
+                    for(int i = 0; i < height; i += unitSize.y()) {
+                        verticalLocations.push_back(i);
+                    }
+                                        
+                    // Based on each x and y position of each snake body, remove that number from the horizonal and vertical location lists
+                    // After doing that, you are left with two lists that have values where the snake body is not located.
+                    for(TransformComponent* transformComponent : snakeBodyComponent->snakeBody) {
+                        std::vector<int>::iterator horizontalIndexIterator = std::find(horizontalLocations.begin(), horizontalLocations.end(), transformComponent->getWorldPositionVector().x());
+                        if(horizontalIndexIterator != horizontalLocations.end()) {
+                            horizontalLocations.erase(horizontalIndexIterator);
+                        }
+                        std::vector<int>::iterator verticalIndexIterator = std::find(verticalLocations.begin(), verticalLocations.end(), transformComponent->getWorldPositionVector().y());
+                        if(verticalIndexIterator != verticalLocations.end()) {
+                            verticalLocations.erase(verticalIndexIterator);
+                        }
+                    }
+                    
+                    // Pick a random horizontal and vertical location and set the food object to that position
+                    std::uniform_int_distribution<int> horizontalDistribution(0, static_cast<int>(horizontalLocations.size() - 1));
+                    std::uniform_int_distribution<int> verticalDistribution(0, static_cast<int>(verticalLocations.size() - 1));
+                    std::mt19937 generator(static_cast<std::mt19937::result_type>(std::time(nullptr)));
+                    int horizontalIndex = horizontalDistribution(generator);
+                    int verticalIndex = verticalDistribution(generator);
+                    foodObject->getComponent<TransformComponent>()->positionVector = Eigen::Vector2f { horizontalLocations[horizontalIndex], verticalLocations[verticalIndex] };
                 }
                 // Test for collision with the snake body
                 else if(snakeBodyComponent->snakeBody.size() > 1) {

@@ -28,8 +28,6 @@
 #include "Game/GameObjects/GameObject.hpp"
 #include "Game/GameObjects/SnakeObject.hpp"
 
-#include <list>
-
 class MovementSystem {
 public:
     MovementSystem(int width, int height);
