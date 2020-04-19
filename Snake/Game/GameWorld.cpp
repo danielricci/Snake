@@ -84,6 +84,9 @@ void GameWorld::run() {
         return gameWorld->tickSpeed;
     }, this);
 
+    // Perform an initial draw
+    draw();
+    
     // Run the game loop
     bool isGameQuit = false;
     while(!isGameQuit) {
@@ -119,16 +122,22 @@ void GameWorld::run() {
                 // Movement System
                 movementSystem->process(this->getGameObject<SnakeObject>(), this->getGameObject<FoodObject>());
                 
-                // Clear the back buffer to prepare it for rendering
-                SDL_SetRenderDrawColor(&renderer, 0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE);
-                SDL_RenderClear(&renderer);
-                
-                // Render System
-                renderSystem->process(gameObjects);
-                
-                // Blit everything onto the display
-                SDL_RenderPresent(&renderer);
+                // Draw the screen
+                draw();
             }
         }
     }
+}
+
+void GameWorld::draw() const {
+    
+    // Clear the back buffer to prepare it for rendering
+    SDL_SetRenderDrawColor(&renderer, 0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE);
+    SDL_RenderClear(&renderer);
+    
+    // Render System
+    renderSystem->process(gameObjects);
+    
+    // Blit everything onto the display
+    SDL_RenderPresent(&renderer);
 }

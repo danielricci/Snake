@@ -39,6 +39,8 @@ public:
     
     void run();
 private:
+    void draw() const;
+    
     template<typename T> T* getGameObject() {
         for(GameObject* gameObject : gameObjects) {
             T* object = dynamic_cast<T*>(gameObject);
@@ -74,7 +76,7 @@ private:
         return components;
     }
     
-    int tickSpeed = 40;
+    int tickSpeed = 100;
     
     std::list<GameObject*> gameObjects;
     
