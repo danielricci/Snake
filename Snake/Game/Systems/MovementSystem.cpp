@@ -49,8 +49,8 @@ void MovementSystem::process(SnakeObject* snakeObject, FoodObject* foodObject) {
                 SDL_Rect snakeBodyFront = snakeBodyComponent->snakeBody.front()->getRectangle();
                 
                 // Update the position of whats at the front with whats at the back plus the offset based on the current input
-                snakeBodyComponent->snakeBody.front()->positionVector.x() = snakeBodyComponent->snakeBody.back()->positionVector.x() + (snakeInputComponent->getDirectionVector().x() * snakeBodyComponent->snakeBody.back()->dimensionVector.x());
-                snakeBodyComponent->snakeBody.front()->positionVector.y() = snakeBodyComponent->snakeBody.back()->positionVector.y() + (snakeInputComponent->getDirectionVector().y() * snakeBodyComponent->snakeBody.back()->dimensionVector.y());
+                snakeBodyComponent->snakeBody.front()->positionVector.x() = snakeBodyComponent->snakeBody.back()->positionVector.x() + (snakeInputComponent->getInputVector().x() * snakeBodyComponent->snakeBody.back()->dimensionVector.x());
+                snakeBodyComponent->snakeBody.front()->positionVector.y() = snakeBodyComponent->snakeBody.back()->positionVector.y() + (snakeInputComponent->getInputVector().y() * snakeBodyComponent->snakeBody.back()->dimensionVector.y());
                 
                 // Position the front element to the back
                 snakeBodyComponent->snakeBody.push_back(snakeBodyComponent->snakeBody.front());

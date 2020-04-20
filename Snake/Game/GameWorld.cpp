@@ -28,7 +28,7 @@
 #include "Game/Managers/InputManager.hpp"
 
 GameWorld::GameWorld(SDL_Window& window, SDL_Renderer& renderer) : renderer(renderer) {
-    // TODO initialization should be done better than this...
+    // TODO Can the initialization be done in a better way than this?
     InputManager::getInstance();
 
     renderSystem = new RenderSystem(renderer);
