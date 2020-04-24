@@ -23,10 +23,15 @@
 */
 
 #include "Game/Components/SnakeBodyComponent.hpp"
+#include "Game/Components/SnakeInputComponent.hpp"
+
+const int SnakeBodyComponent::CELL_WIDTH = 9;
+const int SnakeBodyComponent::CELL_HEIGHT = 9;
+const int SnakeBodyComponent::INITIAL_LENGTH = 12;
 
 SnakeBodyComponent::SnakeBodyComponent(GameObject* gameObject) : Component(gameObject) {
     for(int i = 0; i < INITIAL_LENGTH; ++i) {
-        snakeBody.push_back(new TransformComponent(gameObject, i * CELL_WIDTH, 0, CELL_HEIGHT, CELL_WIDTH));
+        snakeBody.push_back(new TransformComponent(gameObject, i * CELL_WIDTH, 0, CELL_WIDTH, CELL_HEIGHT));
     }
 }
 
@@ -36,4 +41,13 @@ SnakeBodyComponent::~SnakeBodyComponent() {
         transformComponent = nullptr;
     }
     snakeBody.clear();
+}
+
+void SnakeBodyComponent::moveTailToHead() {
+    SnakeInputComponent* snakeInputComponent = getGameObject()->getComponent<SnakeInputComponent>();
+    getTail()->positionVector.x() = getHead()->positionVector.x() + (snakeInputComponent->getInputVector().x() * SnakeBodyComponent::CELL_WIDTH);
+    getTail()->positionVector.y() = getHead()->positionVector.y() + (snakeInputComponent->getInputVector().y() * SnakeBodyComponent::CELL_HEIGHT);
+    
+    snakeBody.push_back(snakeBody.front());
+    snakeBody.pop_front();
 }

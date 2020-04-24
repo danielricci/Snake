@@ -55,15 +55,19 @@ void RenderSystem::processSnakeRender(const SnakeObject& snakeObject) {
     SDL_SetRenderDrawColor(&renderer, 0x00, 0xFF, 0x00, SDL_ALPHA_OPAQUE);
     
     SnakeBodyComponent* snakeBodyComponent = snakeObject.getComponent<SnakeBodyComponent>();
-    for(int i = 0; i < snakeBodyComponent->snakeBody.size(); ++i) {
-        TransformComponent* snakeBodyTransform = snakeBodyComponent->snakeBody[i];
-        Eigen::Vector2f worldPosition = snakeBodyTransform->getWorldPositionVector();
+    Eigen::Vector2f worldPosition = snakeBodyComponent->getGameObject()->getComponent<TransformComponent>()->positionVector;
+    
+    std::deque<TransformComponent*>::iterator snakeBodyTailIterator = snakeBodyComponent->getTailIterator();
+    while(snakeBodyTailIterator != snakeBodyComponent->getHeadIterator()) {
+        
         SDL_Rect rectangle;
-        rectangle.x = worldPosition.x();
-        rectangle.y = worldPosition.y();
-        rectangle.w = snakeBodyTransform->dimensionVector.x();
-        rectangle.h = snakeBodyTransform->dimensionVector.y();
+        rectangle.x = worldPosition.x() + (*snakeBodyTailIterator)->positionVector.x();
+        rectangle.y = worldPosition.y() + (*snakeBodyTailIterator)->positionVector.y();
+        rectangle.w = SnakeBodyComponent::CELL_WIDTH;
+        rectangle.h = SnakeBodyComponent::CELL_HEIGHT;
         SDL_RenderFillRect(&renderer, &rectangle);
+        
+        ++snakeBodyTailIterator;
     }
 }
 

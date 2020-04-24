@@ -11,8 +11,8 @@ void SnakeInputComponent::onMove(const SDL_Event& event) {
     if(event.type == SDL_KEYDOWN) {
         switch(event.key.keysym.sym) {
             case SDLK_UP: {
-                inputVector.y() = -1;
                 inputVector.x() = 0;
+                inputVector.y() = -1;
                 break;
             }
             case SDLK_LEFT:
@@ -20,8 +20,8 @@ void SnakeInputComponent::onMove(const SDL_Event& event) {
                 inputVector.y() = 0;
                 break;
             case SDLK_DOWN: {
-                inputVector.y() = 1;
                 inputVector.x() = 0;
+                inputVector.y() = 1;
                 break;
             }
             case SDLK_RIGHT: {

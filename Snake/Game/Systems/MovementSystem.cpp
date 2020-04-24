@@ -44,22 +44,21 @@ void MovementSystem::process(SnakeObject* snakeObject, FoodObject* foodObject) {
         if(snakeInputComponent != nullptr) {
             SnakeBodyComponent* snakeBodyComponent = snakeObject->getComponent<SnakeBodyComponent>();
             if(snakeBodyComponent != nullptr) {
+                snakeBodyComponent->moveTailToHead();
+
                 
-                // Hold onto a reference of the front of the snake. If there is a collision with food then put a new transform here
-                SDL_Rect snakeBodyFront = snakeBodyComponent->snakeBody.front()->getRectangle();
+                // TODO - Get World position!
+//                if(snakeBodyComponent->snakeBody.back()->getWorldPositionVector() == foodObject->getComponent<TransformComponent>()->positionVector) {
+//
+//                }
                 
-                // Update the position of whats at the front with whats at the back plus the offset based on the current input
-                snakeBodyComponent->snakeBody.front()->positionVector.x() = snakeBodyComponent->snakeBody.back()->positionVector.x() + (snakeInputComponent->getInputVector().x() * snakeBodyComponent->snakeBody.back()->dimensionVector.x());
-                snakeBodyComponent->snakeBody.front()->positionVector.y() = snakeBodyComponent->snakeBody.back()->positionVector.y() + (snakeInputComponent->getInputVector().y() * snakeBodyComponent->snakeBody.back()->dimensionVector.y());
-                
-                // Position the front element to the back
-                snakeBodyComponent->snakeBody.push_back(snakeBodyComponent->snakeBody.front());
-                snakeBodyComponent->snakeBody.pop_front();
-                
+                /*
+                // Hold onto a reference of the front of the snake.
+                Eigen::Vector2f snakeBodyFront = snakeBodyComponent->getTail();
+
                 // Test for collision with the outside of the game bounds
-                TransformComponent* headSnake = snakeBodyComponent->snakeBody.back();
-                Eigen::Vector2f headSnakeWorldPosition = headSnake->getWorldPositionVector();
-                if(headSnakeWorldPosition.x() < 0 || headSnakeWorldPosition.y() < 0 || headSnakeWorldPosition.x() >= width || headSnakeWorldPosition.y() >= height) {
+                Eigen::Vector2f headSnakeWorldPosition = snakeBodyComponent->getHead()->getWorldPositionVector();
+                if(headSnakeWorldPosition.x() < 0 || headSnakeWorldPosition.y() < 0 || snakeBodyComponent->getHead().x() >= width || snakeBodyComponent->getHead().y() >= height) {
                     
                 }
                 // Test for collision with food
@@ -110,6 +109,8 @@ void MovementSystem::process(SnakeObject* snakeObject, FoodObject* foodObject) {
                         }
                     }
                 }
+                 
+                 */
             }
         }
     }

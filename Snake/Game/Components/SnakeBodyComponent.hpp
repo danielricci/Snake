@@ -33,13 +33,21 @@ class SnakeBodyComponent : public Component {
 public:
     SnakeBodyComponent(GameObject* gameObject);
     virtual ~SnakeBodyComponent();
-    
-    inline Eigen::Vector2i getUnitSize() const { return Eigen::Vector2i(CELL_WIDTH, CELL_HEIGHT); }
+  
     inline std::deque<TransformComponent*>::size_type getLength() const { return snakeBody.size(); }
+
+    inline TransformComponent* getTail() { return snakeBody.front(); }
+    inline TransformComponent* getHead() { return snakeBody.back(); }
+
+    inline std::deque<TransformComponent*>::iterator getTailIterator() { return snakeBody.begin(); }
+    inline std::deque<TransformComponent*>::iterator getHeadIterator() { return snakeBody.end(); }
     
-    std::deque<TransformComponent*> snakeBody;
+    void moveTailToHead();
+    
+    static const int CELL_WIDTH;
+    static const int CELL_HEIGHT;
 private:
-    const int CELL_WIDTH = 9;
-    const int CELL_HEIGHT = 9;
-    const int INITIAL_LENGTH = 12;
+    std::deque<TransformComponent*> snakeBody;
+    
+    static const int INITIAL_LENGTH;
 };
