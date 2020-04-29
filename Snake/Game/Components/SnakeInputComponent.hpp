@@ -10,8 +10,6 @@ public:
     inline Eigen::Vector2f getInputVector() const {
         return inputVector;
     }
-    bool isValidInput(Eigen::Vector2f directionVector) const;
-    
 private:
     void onMove(const SDL_Event& event);
     

@@ -31,4 +31,7 @@ SnakeObject::SnakeObject(int x, int y) : GameObject(x, y) {
     this->addComponent(new SnakeBodyComponent(this));
     this->addComponent(new RenderComponent(this));
     this->addComponent(new SnakeInputComponent(this));
+    
+    // Set the initial velocity of the snake with whatever the currently set input vector is
+    getComponent<TransformComponent>()->velocityVector = getComponent<SnakeInputComponent>()->getInputVector();
 }

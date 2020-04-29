@@ -43,11 +43,20 @@ SnakeBodyComponent::~SnakeBodyComponent() {
     snakeBody.clear();
 }
 
+void SnakeBodyComponent::increaseSnakeLength(const Eigen::Vector2f& position) {
+    snakeBody.push_front(new TransformComponent(getGameObject(), position.x(), position.y(), CELL_WIDTH, CELL_HEIGHT));
+}
+
 void SnakeBodyComponent::moveTailToHead() {
+    // Update the velocity vector of the snake
     SnakeInputComponent* snakeInputComponent = getGameObject()->getComponent<SnakeInputComponent>();
+    getGameObject()->getComponent<TransformComponent>()->velocityVector = snakeInputComponent->getInputVector();
+    
+    // Apply the velocity to a new movement unit
     getTail()->positionVector.x() = getHead()->positionVector.x() + (snakeInputComponent->getInputVector().x() * SnakeBodyComponent::CELL_WIDTH);
     getTail()->positionVector.y() = getHead()->positionVector.y() + (snakeInputComponent->getInputVector().y() * SnakeBodyComponent::CELL_HEIGHT);
     
+    // Poition the tail of the snake as the new head of the snake
     snakeBody.push_back(snakeBody.front());
     snakeBody.pop_front();
 }

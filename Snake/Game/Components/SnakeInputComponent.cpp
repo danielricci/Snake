@@ -1,4 +1,5 @@
 #include "Game/Components/SnakeInputComponent.hpp"
+#include "Game/Components/TransformComponent.hpp"
 
 SnakeInputComponent::SnakeInputComponent(GameObject* gameObject) : InputComponent(gameObject) {
     this->addBinding(SDLK_UP, ACTION_MOVE, std::bind(&SnakeInputComponent::onMove, this, std::placeholders::_1));
@@ -9,40 +10,42 @@ SnakeInputComponent::SnakeInputComponent(GameObject* gameObject) : InputComponen
 
 void SnakeInputComponent::onMove(const SDL_Event& event) {
     if(event.type == SDL_KEYDOWN) {
+        // Calculate the new velocity w.r.t the input provided
+        Eigen::Vector2f newInputVector;
         switch(event.key.keysym.sym) {
             case SDLK_UP: {
-                inputVector.x() = 0;
-                inputVector.y() = -1;
+                newInputVector.x() = 0;
+                newInputVector.y() = -1;
                 break;
             }
             case SDLK_LEFT:
-                inputVector.x() = -1;
-                inputVector.y() = 0;
+                newInputVector.x() = -1;
+                newInputVector.y() = 0;
                 break;
             case SDLK_DOWN: {
-                inputVector.x() = 0;
-                inputVector.y() = 1;
+                newInputVector.x() = 0;
+                newInputVector.y() = 1;
                 break;
             }
             case SDLK_RIGHT: {
-                inputVector.x() = 1;
-                inputVector.y() = 0;
+                newInputVector.x() = 1;
+                newInputVector.y() = 0;
                 break;
             }
+            default: {
+                return;
+            }
         }
+        
+        // Get a reference to the velocity vector of the game object, and ensure that the new desired input is an allowed
+        // input w.r.t the direction of the snake.
+        Eigen::Vector2f snakeVelocityVector = getGameObject()->getComponent<TransformComponent>()->velocityVector;
+        if((newInputVector.x() == 1 || newInputVector.x() == -1) && (snakeVelocityVector.x() == 1 || snakeVelocityVector.x() == -1)) {
+            return;
+        }
+        if((newInputVector.y() == 1 || newInputVector.y() == -1) && (snakeVelocityVector.y() == 1 || snakeVelocityVector.y() == -1)) {
+            return;
+        }
+        inputVector = newInputVector;
     }
-}
-
-bool SnakeInputComponent::isValidInput(Eigen::Vector2f directionVector) const {
-    // Movement along the y-axis is restricted if already moving along the y-axis
-    if((inputVector.y() == 1 || inputVector.y() == -1) && (directionVector.y() == 1 || directionVector.y() == -1)) {
-        return false;
-    }
-    
-    // Movement along the x-axis is restricted if already moving along the x-axis
-    if((inputVector.x() == 1 || inputVector.y() == -1) && (directionVector.x() == 1 || directionVector.x() == -1)) {
-        return false;
-    }
-    
-    return true;
 }

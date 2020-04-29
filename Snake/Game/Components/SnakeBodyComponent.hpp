@@ -27,6 +27,8 @@
 #include "Game/Components/Component.hpp"
 #include "Game/Components/TransformComponent.hpp"
 
+#include <Eigen/Dense>
+
 #include <deque>
 
 class SnakeBodyComponent : public Component {
@@ -43,6 +45,7 @@ public:
     inline std::deque<TransformComponent*>::iterator getHeadIterator() { return snakeBody.end(); }
     
     void moveTailToHead();
+    void increaseSnakeLength(const Eigen::Vector2f& position);
     
     static const int CELL_WIDTH;
     static const int CELL_HEIGHT;
