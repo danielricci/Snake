@@ -52,19 +52,24 @@ void RenderSystem::process(const std::list<GameObject*> gameObjects) {
 }
 
 void RenderSystem::processSnakeRender(const SnakeObject& snakeObject) {
-    SDL_SetRenderDrawColor(&renderer, 0x00, 0xFF, 0x00, SDL_ALPHA_OPAQUE);
     
     SnakeBodyComponent* snakeBodyComponent = snakeObject.getComponent<SnakeBodyComponent>();
     Eigen::Vector2f worldPosition = snakeBodyComponent->getGameObject()->getComponent<TransformComponent>()->positionVector;
     
     std::deque<TransformComponent*>::iterator snakeBodyTailIterator = snakeBodyComponent->getTailIterator();
     while(snakeBodyTailIterator != snakeBodyComponent->getHeadIterator()) {
-        
         SDL_Rect rectangle;
         rectangle.x = worldPosition.x() + (*snakeBodyTailIterator)->positionVector.x();
         rectangle.y = worldPosition.y() + (*snakeBodyTailIterator)->positionVector.y();
         rectangle.w = SnakeBodyComponent::CELL_WIDTH;
         rectangle.h = SnakeBodyComponent::CELL_HEIGHT;
+    
+        if(*snakeBodyTailIterator != snakeBodyComponent->getHead()) {
+            SDL_SetRenderDrawColor(&renderer, 0x00, 0xFF, 0x00, SDL_ALPHA_OPAQUE);
+        }
+        else {
+            SDL_SetRenderDrawColor(&renderer, 0xFF, 0x00, 0x00, SDL_ALPHA_OPAQUE);
+        }
         SDL_RenderFillRect(&renderer, &rectangle);
         
         ++snakeBodyTailIterator;

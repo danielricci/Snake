@@ -27,6 +27,8 @@
 #include "Game/GameWorld.hpp"
 #include "Game/Managers/InputManager.hpp"
 
+#include <iostream>
+
 GameWorld::GameWorld(SDL_Window& window, SDL_Renderer& renderer) : renderer(renderer) {
     // TODO Can the initialization be done in a better way than this?
     InputManager::getInstance();
@@ -39,10 +41,13 @@ GameWorld::GameWorld(SDL_Window& window, SDL_Renderer& renderer) : renderer(rend
     movementSystem = new MovementSystem(width, height);
     
     // Create the Snake Object
-    gameObjects.push_back(new SnakeObject(306, 306));
+    SnakeObject* snakeObject = new SnakeObject(SnakeBodyComponent::CELL_WIDTH, 20 * SnakeBodyComponent::CELL_HEIGHT);
+    gameObjects.push_back(snakeObject);
     
     // Create the Food Object
-    gameObjects.push_back(new FoodObject(72, 72, SnakeBodyComponent::CELL_WIDTH, SnakeBodyComponent::CELL_HEIGHT));
+    FoodObject* foodObject = new FoodObject(0, 0, SnakeBodyComponent::CELL_WIDTH, SnakeBodyComponent::CELL_HEIGHT);
+    movementSystem->processFoodPosition(snakeObject, foodObject);
+    gameObjects.push_back(foodObject);
 }
 
 GameWorld::~GameWorld() {
@@ -98,19 +103,27 @@ void GameWorld::run() {
             }
             
             // Handle the speed of the snake. For now this is done through F1 (decrease) and F2 (increase) speed options
-            if(event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_F1) {
-                int newSpeed = this->tickSpeed - 100;
-                if(newSpeed >= 100) {
-                    this->tickSpeed = newSpeed;
+            if(event.type == SDL_KEYUP) {
+                if(event.key.keysym.sym == SDLK_F1) {
+                    int newSpeed = this->tickSpeed - 100;
+                    if(newSpeed >= 100) {
+                        this->tickSpeed = newSpeed;
+                    }
+                }
+                else if(event.key.keysym.sym == SDLK_F2) {
+                    int newSpeed = this->tickSpeed + 100;
+                    if(newSpeed <= 1000) {
+                        this->tickSpeed = newSpeed;
+                    }
+                }
+                else if(event.key.keysym.sym == SDLK_F3) {
+                    FoodObject* foodObject = getGameObject<FoodObject>();
+                    movementSystem->processFoodPosition(getGameObject<SnakeObject>(), foodObject);
+                    Eigen::Vector2f positionVector = foodObject->getComponent<TransformComponent>()->positionVector;
+                    std::cout << "(" << positionVector.x() << "," <<  positionVector.y() << ")" << std::endl;
                 }
             }
-            else if(event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_F2) {
-                int newSpeed = this->tickSpeed + 100;
-                if(newSpeed <= 1000) {
-                    this->tickSpeed = newSpeed;
-                }
-            }
-            
+           
             // Process any inputs
             InputManager::getInstance()->process(event, getGameComponents<SnakeObject, InputComponent>());
             

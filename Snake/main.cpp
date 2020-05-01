@@ -27,5 +27,5 @@
 #include <SDL.h>
 
 int main(int argc, char** argv) {
-    GameWindow("Snake", 900, 900).show();
+    GameWindow("Snake", 306, 306).show();
 }

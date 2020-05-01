@@ -32,6 +32,7 @@ class MovementSystem {
 public:
     MovementSystem(int width, int height);
     void process(SnakeObject* snakeObject, FoodObject* foodObject);
+    void processFoodPosition(SnakeObject* snakeObject, FoodObject* foodObject);
 private:
     const int width = 0;
     const int height = 0;
