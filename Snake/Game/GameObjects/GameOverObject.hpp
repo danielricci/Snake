@@ -34,16 +34,17 @@
 
 class GameOverObject : public GameObject {
 public:
-    GameOverObject(int windowWidth, int windowHeight, SDL_Renderer& renderer);
+    GameOverObject(SDL_Window& window, SDL_Renderer& renderer);
     
     bool getIsGameOver() const { return isGameOver; }
     void setIsGameOver(bool isGameOver);
     
 private:
-    TextComponent* textComponent = new TextComponent(40);
+    const int SIZE = 30;
+    const std::string GAME_OVER { "GAME OVER" };
+    
+    TextComponent* textComponent = new TextComponent(this, SIZE);
     TextRenderComponent* textRenderComponent { nullptr };
     
     bool isGameOver { false };
-    
-    std::string GAME_OVER { "GAME OVER" };
 };

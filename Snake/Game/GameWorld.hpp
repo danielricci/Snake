@@ -25,6 +25,7 @@
 #pragma once
 
 #include "Game/GameObjects/GameObject.hpp"
+#include "Game/GameWindow.hpp"
 #include "Game/Systems/RenderSystem.hpp"
 #include "Game/Systems/MovementSystem.hpp"
 
@@ -76,10 +77,15 @@ private:
         return components;
     }
     
+    void clean();
+    void initialize();
+    void destroy();
+    
     int tickSpeed = 100;
     
     std::list<GameObject*> gameObjects;
     
+    SDL_Window& window;
     SDL_Renderer& renderer;
     
     RenderSystem* renderSystem =  nullptr;

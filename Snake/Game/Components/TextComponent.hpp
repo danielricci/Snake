@@ -32,7 +32,7 @@
 
 class TextComponent : public Component {
 public:
-    TextComponent(int size);
+    TextComponent(GameObject* gameObject, int size, bool bold = false, bool italic = false);
     ~TextComponent();
     
     std::string getText() const { return text; }

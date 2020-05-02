@@ -26,7 +26,7 @@
 
 #include <iostream>
 
-TextRenderComponent::TextRenderComponent(SDL_Renderer& renderer) : renderer(renderer) {
+TextRenderComponent::TextRenderComponent(GameObject* gameObject, SDL_Renderer& renderer) : RenderComponent(gameObject), renderer(renderer) {
 }
 
 TextRenderComponent::~TextRenderComponent() {

@@ -39,26 +39,23 @@
 MovementSystem::MovementSystem(int width, int height) : width(width), height(height) {
 }
 
-void MovementSystem::process(SnakeObject* snakeObject, FoodObject* foodObject) {
+void MovementSystem::process(SnakeObject* snakeObject, FoodObject* foodObject, GameOverObject* gameOverObject) {
     if(snakeObject != nullptr && foodObject != nullptr) {
         SnakeBodyComponent* snakeBodyComponent = snakeObject->getComponent<SnakeBodyComponent>();
                 
         // Store a reference of the tail position before performing the move
+        // and perform the movement of the snake by a unit
         Eigen::Vector2f tailPosition = snakeBodyComponent->getTail()->positionVector;
-
-        // Perform the movement of the snake
         snakeBodyComponent->moveTailToHead();
 
         // Test for collision with the outside of the game bounds
         Eigen::Vector2f headWorldPosition = snakeBodyComponent->getHead()->getWorldPositionVector();
         if(headWorldPosition.x() < 0 || headWorldPosition.y() < 0 || snakeBodyComponent->getHead()->positionVector.x() >= width || snakeBodyComponent->getHead()->positionVector.y() >= height) {
-            
+            gameOverObject->setIsGameOver(true);
         }
         // Test for collision with food
         else if(headWorldPosition == foodObject->getComponent<TransformComponent>()->positionVector) {
-            // Increase the length of the snake because of the food consumption
             snakeBodyComponent->increaseSnakeLength(tailPosition);
-                                
             processFoodPosition(snakeObject, foodObject);
         }
         // Test for collision with the snake body
@@ -66,6 +63,7 @@ void MovementSystem::process(SnakeObject* snakeObject, FoodObject* foodObject) {
             for(auto snakeBodyTailIterator = snakeBodyComponent->getTailIterator(); snakeBodyTailIterator < snakeBodyComponent->getHeadIterator(); ++snakeBodyTailIterator) {
                 TransformComponent* transformComponent = *snakeBodyTailIterator;
                 if(transformComponent != snakeBodyComponent->getHead() && transformComponent->getWorldPositionVector() == headWorldPosition) {
+                    gameOverObject->setIsGameOver(true);
                     break;
                 }
             }

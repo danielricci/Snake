@@ -27,18 +27,19 @@
 #include "Game/Components/RenderComponent.hpp"
 #include "Game/Components/TransformComponent.hpp"
 
-GameOverObject::GameOverObject(int windowWidth, int windowHeight, SDL_Renderer& renderer) {
-
-    textRenderComponent = new TextRenderComponent(renderer);
+GameOverObject::GameOverObject(SDL_Window& window, SDL_Renderer& renderer) {
+    textRenderComponent = new TextRenderComponent(this, renderer);
     addComponent(this->textRenderComponent);
     
-    // Set the text, it will never change
     textComponent->setText(GAME_OVER);
     textRenderComponent->createTexture(*textComponent->getSurface());
     addComponent(this->textComponent);
     
-    // Set the position of this objectm
-    TransformComponent* transformComponent = this->getTransform();
+    // Set the position of this object
+    int windowWidth = 0;
+    int windowHeight = 0;
+    SDL_GetWindowSize(&window, &windowWidth, &windowHeight);
+    TransformComponent* transformComponent = getComponent<TransformComponent>();
     transformComponent->positionVector.x() = (windowWidth / 2) - (textComponent->getSurface()->w / 2);
     transformComponent->positionVector.y() = (windowHeight / 3) - (textComponent->getSurface()->h / 2);
     

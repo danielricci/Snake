@@ -26,7 +26,7 @@
 
 #include <iostream>
 
-#include <SDL2_gfxPrimitives.h>
+#include <SDL_ttf.h>
 
 GameWindow::GameWindow(const char* title, int width, int height) {
     std::cout << "Application Initializing" << std::endl;
@@ -47,6 +47,11 @@ GameWindow::GameWindow(const char* title, int width, int height) {
         return;
     }
 
+    if(TTF_Init() < 0) {
+        std::cerr << "SDL_ttf could not be initialized: " << TTF_GetError() << std::endl;
+        return;
+    }
+    
     world = new GameWorld(*window, *renderer);
     ready = true;
 }
@@ -56,6 +61,9 @@ GameWindow::~GameWindow() {
         delete world;
         world = nullptr;
     }
+
+    // Note: Gets done after the world because the world has to close TTF related references
+    TTF_Quit();
 
     if(renderer != nullptr) {
         SDL_DestroyRenderer(renderer);

@@ -25,6 +25,8 @@
 #include "Game/Components/RenderComponent.hpp"
 #include "Game/Components/SnakeBodyComponent.hpp"
 #include "Game/Components/TransformComponent.hpp"
+#include "Game/Components/TextComponent.hpp"
+#include "Game/Components/TextRenderComponent.hpp"
 #include "Game/Systems/RenderSystem.hpp"
 
 RenderSystem::RenderSystem(SDL_Renderer& renderer) : renderer(renderer) {
@@ -33,9 +35,22 @@ RenderSystem::RenderSystem(SDL_Renderer& renderer) : renderer(renderer) {
 void RenderSystem::process(const std::list<GameObject*> gameObjects) {
     this->gameObjects = gameObjects;
     for(GameObject* gameObject : gameObjects) {
-        if(gameObject != nullptr) {
-            RenderComponent* renderComponent = gameObject->getComponent<RenderComponent>();
-            if(renderComponent != nullptr && renderComponent->isVisible) {
+        process(gameObject);
+    }
+}
+
+void RenderSystem::process(GameObject* gameObject) {
+    if(gameObject != nullptr) {
+        RenderComponent* renderComponent = gameObject->getComponent<RenderComponent>();
+        if(renderComponent != nullptr && renderComponent->isVisible) {
+            TextComponent* textComponent = gameObject->getComponent<TextComponent>();
+            TextRenderComponent* textRenderComponent = gameObject->getComponent<TextRenderComponent>();
+            if (textComponent != nullptr && textRenderComponent != nullptr) {
+                SDL_Rect rectangle = gameObject->getComponent<TransformComponent>()->getRectangle();
+                SDL_QueryTexture(textRenderComponent->getTexture(), nullptr, nullptr, &rectangle.w, &rectangle.h);
+                SDL_RenderCopy(&renderer, textRenderComponent->getTexture(), nullptr, &rectangle);
+            }
+            else {
                 SnakeObject* snakeObject = dynamic_cast<SnakeObject*>(gameObject);
                 if(snakeObject != nullptr) {
                     processSnakeRender(*snakeObject);

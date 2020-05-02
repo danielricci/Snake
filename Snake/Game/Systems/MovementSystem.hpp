@@ -26,12 +26,13 @@
 
 #include "Game/GameObjects/FoodObject.hpp"
 #include "Game/GameObjects/GameObject.hpp"
+#include "Game/GameObjects/GameOverObject.hpp"
 #include "Game/GameObjects/SnakeObject.hpp"
 
 class MovementSystem {
 public:
     MovementSystem(int width, int height);
-    void process(SnakeObject* snakeObject, FoodObject* foodObject);
+    void process(SnakeObject* snakeObject, FoodObject* foodObject, GameOverObject* gameOverObject);
     void processFoodPosition(SnakeObject* snakeObject, FoodObject* foodObject);
 private:
     const int width = 0;

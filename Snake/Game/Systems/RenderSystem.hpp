@@ -37,6 +37,7 @@ class RenderSystem {
 public:
     RenderSystem(SDL_Renderer& renderer);
     void process(const std::list<GameObject*> gameObjects);
+    void process(GameObject* gameObject);
 private:
     
     void processSnakeRender(const SnakeObject& snakeObject);

@@ -30,7 +30,7 @@
 
 class TextRenderComponent : public RenderComponent {
 public:
-    TextRenderComponent(SDL_Renderer& renderer);
+    TextRenderComponent(GameObject* gameObject, SDL_Renderer& renderer);
     ~TextRenderComponent();
     
     SDL_Texture* getTexture() const { return texture; }

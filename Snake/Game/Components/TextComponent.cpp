@@ -26,12 +26,13 @@
 
 #include <iostream>
 
-TextComponent::TextComponent(int size) {
+TextComponent::TextComponent(GameObject* gameObject, int size, bool bold, bool italic) : Component(gameObject) {
     font = TTF_OpenFont(fontPath, size);
     if(font == nullptr) {
         std::cerr << "Could not open the specified font: " << text << std::endl;
     }
     else {
+        TTF_SetFontStyle(font, (TTF_STYLE_BOLD & (bold ? 0xF : 0x0)) | (TTF_STYLE_ITALIC & (italic ? 0xF : 0x0)));
         createSurface();
     }
 }

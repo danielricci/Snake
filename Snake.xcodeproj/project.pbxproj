@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		03219D472406B5F70050588A /* InputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03219D452406B5F70050588A /* InputManager.cpp */; };
 		0322201B2380FF9D004B0BD1 /* GameWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 032220192380FF9D004B0BD1 /* GameWindow.cpp */; };
+		032589BD245D19240047CF7D /* TextRenderComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 032589BA245D19240047CF7D /* TextRenderComponent.cpp */; };
+		032589BE245D19240047CF7D /* TextComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 032589BB245D19240047CF7D /* TextComponent.cpp */; };
+		032589C0245D1E310047CF7D /* libSDL2_ttf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 032589BF245D1E310047CF7D /* libSDL2_ttf.a */; };
+		032589C3245D2A500047CF7D /* GameOverObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 032589C2245D2A500047CF7D /* GameOverObject.cpp */; };
 		0350F2B223A324FB0038A52E /* CollisionComponent.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 0350F2B123A324FB0038A52E /* CollisionComponent.hpp */; };
 		035DB9E0238B75D90025B2F7 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 035DB9DF238B75D90025B2F7 /* GameObject.cpp */; };
 		0389AD802396F4CA005EEC22 /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0389AD7F2396F4CA005EEC22 /* libSDL2.a */; };
@@ -40,11 +44,20 @@
 		03219D462406B5F70050588A /* InputManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = InputManager.hpp; sourceTree = "<group>"; };
 		032220192380FF9D004B0BD1 /* GameWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameWindow.cpp; sourceTree = "<group>"; };
 		0322201A2380FF9D004B0BD1 /* GameWindow.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameWindow.hpp; sourceTree = "<group>"; };
+		032589B9245D19240047CF7D /* TextRenderComponent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextRenderComponent.hpp; sourceTree = "<group>"; };
+		032589BA245D19240047CF7D /* TextRenderComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextRenderComponent.cpp; sourceTree = "<group>"; };
+		032589BB245D19240047CF7D /* TextComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextComponent.cpp; sourceTree = "<group>"; };
+		032589BC245D19240047CF7D /* TextComponent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextComponent.hpp; sourceTree = "<group>"; };
+		032589BF245D1E310047CF7D /* libSDL2_ttf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_ttf.a; path = ../../../../../../../../usr/local/Cellar/sdl2_ttf/2.0.15/lib/libSDL2_ttf.a; sourceTree = "<group>"; };
+		032589C1245D2A500047CF7D /* GameOverObject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameOverObject.hpp; sourceTree = "<group>"; };
+		032589C2245D2A500047CF7D /* GameOverObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameOverObject.cpp; sourceTree = "<group>"; };
 		0350F2B123A324FB0038A52E /* CollisionComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CollisionComponent.hpp; sourceTree = "<group>"; };
 		035DB9DD238B73EF0025B2F7 /* Component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Component.hpp; sourceTree = "<group>"; };
 		035DB9DF238B75D90025B2F7 /* GameObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
 		035DB9E2238B76AA0025B2F7 /* TransformComponent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TransformComponent.hpp; sourceTree = "<group>"; };
 		037280BD234F9A0D008472B1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		03784F77245D361800C16FD8 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
+		03784F78245D361800C16FD8 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = "<group>"; };
 		03830796243597E100F39FC0 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		03830797243597E100F39FC0 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		0389AD7F2396F4CA005EEC22 /* libSDL2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2.a; path = ../../../../../../../../usr/local/Cellar/sdl2/2.0.10/lib/libSDL2.a; sourceTree = "<group>"; };
@@ -73,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				032589C0245D1E310047CF7D /* libSDL2_ttf.a in Frameworks */,
 				0389AD802396F4CA005EEC22 /* libSDL2.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -98,15 +112,26 @@
 				0322201A2380FF9D004B0BD1 /* GameWindow.hpp */,
 				03EFD232237D004B006EF2A5 /* GameWorld.cpp */,
 				03EFD233237D004B006EF2A5 /* GameWorld.hpp */,
+				039E6C16234E30B0004CCD78 /* main.cpp */,
 				03219D442406B07A0050588A /* Managers */,
 				03EBAAAD23918F4900F8BDE5 /* Systems */,
 			);
 			path = Game;
 			sourceTree = "<group>";
 		};
+		03784F76245D35DF00C16FD8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				03784F77245D361800C16FD8 /* Fonts */,
+				03784F78245D361800C16FD8 /* Sounds */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		0389AD7E2396F4CA005EEC22 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				032589BF245D1E310047CF7D /* libSDL2_ttf.a */,
 				0389AD7F2396F4CA005EEC22 /* libSDL2.a */,
 			);
 			name = Frameworks;
@@ -117,10 +142,11 @@
 			children = (
 				03830797243597E100F39FC0 /* .gitignore */,
 				03830796243597E100F39FC0 /* LICENSE */,
-				0389AD7E2396F4CA005EEC22 /* Frameworks */,
-				039E6C15234E30B0004CCD78 /* Snake */,
 				0317C67F2352500C00D43455 /* Snake */,
 				037280BD234F9A0D008472B1 /* README.md */,
+				0389AD7E2396F4CA005EEC22 /* Frameworks */,
+				03784F76245D35DF00C16FD8 /* Resources */,
+				039E6C15234E30B0004CCD78 /* Snake */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,7 +154,6 @@
 			isa = PBXGroup;
 			children = (
 				032220182380FE60004B0BD1 /* Game */,
-				039E6C16234E30B0004CCD78 /* main.cpp */,
 			);
 			path = Snake;
 			sourceTree = "<group>";
@@ -147,6 +172,8 @@
 		03EFD235237E48BA006EF2A5 /* GameObjects */ = {
 			isa = PBXGroup;
 			children = (
+				032589C2245D2A500047CF7D /* GameOverObject.cpp */,
+				032589C1245D2A500047CF7D /* GameOverObject.hpp */,
 				035DB9DF238B75D90025B2F7 /* GameObject.cpp */,
 				03EFD237237E48D9006EF2A5 /* GameObject.hpp */,
 				03A1675924190C320014CA0D /* SnakeObject.cpp */,
@@ -160,6 +187,10 @@
 		03EFD23C237E49CA006EF2A5 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				032589BB245D19240047CF7D /* TextComponent.cpp */,
+				032589BC245D19240047CF7D /* TextComponent.hpp */,
+				032589BA245D19240047CF7D /* TextRenderComponent.cpp */,
+				032589B9245D19240047CF7D /* TextRenderComponent.hpp */,
 				0350F2B123A324FB0038A52E /* CollisionComponent.hpp */,
 				035DB9DD238B73EF0025B2F7 /* Component.hpp */,
 				03D47C5E2381B00A0004A67B /* InputComponent.hpp */,
@@ -253,10 +284,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				03CEDEBB2434E718005CE12B /* MovementSystem.cpp in Sources */,
+				032589BD245D19240047CF7D /* TextRenderComponent.cpp in Sources */,
 				03A1675E241AA0B10014CA0D /* RenderSystem.cpp in Sources */,
 				03A1675B24190C320014CA0D /* SnakeObject.cpp in Sources */,
 				03AC0514243A455500867CFF /* FoodObject.cpp in Sources */,
 				0350F2B223A324FB0038A52E /* CollisionComponent.hpp in Sources */,
+				032589C3245D2A500047CF7D /* GameOverObject.cpp in Sources */,
+				032589BE245D19240047CF7D /* TextComponent.cpp in Sources */,
 				03219D472406B5F70050588A /* InputManager.cpp in Sources */,
 				035DB9E0238B75D90025B2F7 /* GameObject.cpp in Sources */,
 				039363CD2431980E006160D1 /* SnakeInputComponent.cpp in Sources */,
