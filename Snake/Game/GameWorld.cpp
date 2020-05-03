@@ -37,7 +37,7 @@ GameWorld::GameWorld(SDL_Window& window, SDL_Renderer& renderer) : window(window
     int height = 0;
     SDL_GetWindowSize(&window, &width, &height);
     
-    movementSystem = new MovementSystem(width, height);
+    movementSystem = new MovementSystem(window);
     renderSystem = new RenderSystem(renderer);
     
     initialize();
@@ -72,7 +72,7 @@ void GameWorld::destroy() {
 }
 
 void GameWorld::initialize() {
-    SnakeObject* snakeObject = new SnakeObject(SnakeBodyComponent::CELL_WIDTH, 20 * SnakeBodyComponent::CELL_HEIGHT);
+    SnakeObject* snakeObject = new SnakeObject(SnakeBodyComponent::CELL_WIDTH, 20 * SnakeBodyComponent::CELL_HEIGHT, isGameMode2);
     gameObjects.push_back(snakeObject);
     
     FoodObject* foodObject = new FoodObject(0, 0, SnakeBodyComponent::CELL_WIDTH, SnakeBodyComponent::CELL_HEIGHT);
@@ -106,6 +106,7 @@ void GameWorld::run() {
     draw();
         
     bool isGameQuit = false;
+    bool isGameReady = false;
 
     while(!isGameQuit) {
         SDL_Event event;
@@ -143,6 +144,19 @@ void GameWorld::run() {
                     Eigen::Vector2f positionVector = foodObject->getComponent<TransformComponent>()->positionVector;
                     std::cout << "(" << positionVector.x() << "," <<  positionVector.y() << ")" << std::endl;
                 }
+                else if(event.key.keysym.sym == SDLK_F4) {
+                    isGameMode2 = !isGameMode2;
+                    clean();
+                    initialize();
+                    break;
+                }
+            }
+            else if(event.type == SDL_KEYDOWN && !isGameReady) {
+                isGameReady = true;
+            }
+            
+            if(!isGameReady) {
+                break;
             }
            
             // Process any inputs

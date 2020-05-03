@@ -29,12 +29,13 @@
 #include "Game/GameObjects/GameOverObject.hpp"
 #include "Game/GameObjects/SnakeObject.hpp"
 
+#include <SDL.h>
+
 class MovementSystem {
 public:
-    MovementSystem(int width, int height);
+    MovementSystem(SDL_Window& window);
     void process(SnakeObject* snakeObject, FoodObject* foodObject, GameOverObject* gameOverObject);
     void processFoodPosition(SnakeObject* snakeObject, FoodObject* foodObject);
 private:
-    const int width = 0;
-    const int height = 0;
+    SDL_Window& window;
 };

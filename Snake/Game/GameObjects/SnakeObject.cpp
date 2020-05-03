@@ -27,8 +27,10 @@
 #include "Game/Components/SnakeInputComponent.hpp"
 #include "Game/GameObjects/SnakeObject.hpp"
 
-SnakeObject::SnakeObject(int x, int y) : GameObject(x, y) {
-    this->addComponent(new SnakeBodyComponent(this));
+SnakeObject::SnakeObject(int x, int y, bool isGameMode2) : GameObject(x, y) {
+    SnakeBodyComponent* snakeBodyComponent = new SnakeBodyComponent(this);
+    snakeBodyComponent->isGameMode2 = isGameMode2;
+    this->addComponent(snakeBodyComponent);
     this->addComponent(new RenderComponent(this));
     this->addComponent(new SnakeInputComponent(this));
     

@@ -30,5 +30,5 @@
 
 class SnakeObject : public GameObject {
 public:
-    SnakeObject(int x, int y);
+    SnakeObject(int x, int y, bool isGameMode2);
 };

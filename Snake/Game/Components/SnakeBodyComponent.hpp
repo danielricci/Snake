@@ -49,6 +49,8 @@ public:
     
     static const int CELL_WIDTH;
     static const int CELL_HEIGHT;
+    
+    bool isGameMode2 = false;
 private:
     std::deque<TransformComponent*> snakeBody;
     

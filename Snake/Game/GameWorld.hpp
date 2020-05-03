@@ -90,4 +90,6 @@ private:
     
     RenderSystem* renderSystem =  nullptr;
     MovementSystem* movementSystem = nullptr;
+    
+    bool isGameMode2 = false;
 };

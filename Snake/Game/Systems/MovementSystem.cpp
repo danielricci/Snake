@@ -36,7 +36,7 @@
 #include <random>
 #include <vector>
 
-MovementSystem::MovementSystem(int width, int height) : width(width), height(height) {
+MovementSystem::MovementSystem(SDL_Window& window) : window(window) {
 }
 
 void MovementSystem::process(SnakeObject* snakeObject, FoodObject* foodObject, GameOverObject* gameOverObject) {
@@ -48,8 +48,23 @@ void MovementSystem::process(SnakeObject* snakeObject, FoodObject* foodObject, G
         Eigen::Vector2f tailPosition = snakeBodyComponent->getTail()->positionVector;
         snakeBodyComponent->moveTailToHead();
 
+        // Simulate the mode 2 game by always increasing the snake size
+        if(snakeBodyComponent->isGameMode2) {
+            snakeBodyComponent->increaseSnakeLength(tailPosition);
+        }
+        
+        int width = 0;
+        int height = 0;
+        SDL_GetWindowSize(&window, &width, &height);
+      
+        // The player has won the game
+        if(snakeBodyComponent->getLength() == width * height) {
+            gameOverObject->setIsGameOver(true);
+        }
+        
         // Test for collision with the outside of the game bounds
         Eigen::Vector2f headWorldPosition = snakeBodyComponent->getHead()->getWorldPositionVector();
+        std::cout << "Head = " << headWorldPosition.x() << "," << headWorldPosition.y() << std::endl;
         if(headWorldPosition.x() < 0 || headWorldPosition.y() < 0 || snakeBodyComponent->getHead()->positionVector.x() >= width || snakeBodyComponent->getHead()->positionVector.y() >= height) {
             gameOverObject->setIsGameOver(true);
         }
@@ -78,6 +93,10 @@ void MovementSystem::processFoodPosition(SnakeObject* snakeObject, FoodObject* f
     // Create the lists to hold all valid horizontal and vertical locations
     std::vector<int> horizontalLocations;
     std::vector<int> verticalLocations;
+    
+    int width = 0;
+    int height = 0;
+    SDL_GetWindowSize(&window, &width, &height);
 
     // Fill both lists with values start at origin (0,0) outwards to width and downwards to height
     for(int i = 0; i < width; i += SnakeBodyComponent::CELL_WIDTH) {
@@ -109,4 +128,5 @@ void MovementSystem::processFoodPosition(SnakeObject* snakeObject, FoodObject* f
     int horizontalIndex = horizontalDistribution(generator);
     int verticalIndex = verticalDistribution(generator);
     foodObject->getComponent<TransformComponent>()->positionVector = Eigen::Vector2f { horizontalLocations[horizontalIndex], verticalLocations[verticalIndex] };
+    std::cout << "POSITION = " << horizontalLocations[horizontalIndex] << "," << verticalLocations[verticalIndex] << ")" << std::endl;
 }
