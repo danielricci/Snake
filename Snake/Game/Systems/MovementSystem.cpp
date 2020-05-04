@@ -67,7 +67,6 @@ void MovementSystem::process(SnakeObject* snakeObject, FoodObject* foodObject, G
         Eigen::Vector2f snakeHeadWorldPosition = snakeHeadTransform->getWorldPositionVector();
         
         // Test for collision with the outside of the game bounds
-        std::cout << "Head = " << snakeHeadWorldPosition.x() << "," << snakeHeadWorldPosition.y() << std::endl;
         if(snakeHeadWorldPosition.x() < 0 || snakeHeadWorldPosition.y() < 0 || snakeHeadWorldPosition.x() + SnakeBodyComponent::CELL_WIDTH > width || snakeHeadWorldPosition.y() + SnakeBodyComponent::CELL_HEIGHT > height) {
             gameOverObject->setIsGameOver(true);
         }
@@ -131,5 +130,4 @@ void MovementSystem::processFoodPosition(SnakeObject* snakeObject, FoodObject* f
     int horizontalIndex = horizontalDistribution(generator);
     int verticalIndex = verticalDistribution(generator);
     foodObject->getComponent<TransformComponent>()->positionVector = Eigen::Vector2f { horizontalLocations[horizontalIndex], verticalLocations[verticalIndex] };
-    std::cout << "POSITION = " << horizontalLocations[horizontalIndex] << "," << verticalLocations[verticalIndex] << ")" << std::endl;
 }
