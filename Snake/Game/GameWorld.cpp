@@ -120,7 +120,7 @@ void GameWorld::run() {
             
             // Handle the speed of the snake. For now this is done through F1 (decrease) and F2 (increase) speed options
             if(event.type == SDL_KEYUP) {
-                if(getGameObject<GameOverObject>()->getIsGameOver()) {
+                if(getGameObject<GameOverObject>()->getIsGameOver() && event.key.keysym.sym == SDLK_RETURN) {
                     clean();
                     initialize();
                     break;
