@@ -82,6 +82,9 @@ private:
     void destroy();
     
     int tickSpeed = 100;
+    bool isGameQuit = false;
+    bool isGameRunning = false;
+    bool isGameMode2 = false;
     
     std::list<GameObject*> gameObjects;
     
@@ -90,6 +93,4 @@ private:
     
     RenderSystem* renderSystem =  nullptr;
     MovementSystem* movementSystem = nullptr;
-    
-    bool isGameMode2 = false;
 };

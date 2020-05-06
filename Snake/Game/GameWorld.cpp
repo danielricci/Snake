@@ -28,8 +28,6 @@
 #include "Game/GameWindow.hpp"
 #include "Game/Managers/InputManager.hpp"
 
-#include <iostream>
-
 GameWorld::GameWorld(SDL_Window& window, SDL_Renderer& renderer) : window(window), renderer(renderer) {
     InputManager::getInstance();
     
@@ -53,6 +51,9 @@ void GameWorld::clean() {
         gameObject = nullptr;
     }
     gameObjects.clear();
+    
+    isGameRunning = true;
+    isGameQuit = false;
 }
 
 void GameWorld::destroy() {
@@ -105,65 +106,66 @@ void GameWorld::run() {
     // Perform an initial draw to show everything on screen
     draw();
         
-    bool isGameQuit = false;
-    bool isGameReady = false;
-
     while(!isGameQuit) {
         SDL_Event event;
         while(SDL_PollEvent(&event) != 0) {
-            // Handle the quit event
             if(event.type == SDL_QUIT || event.key.keysym.sym == SDLK_ESCAPE) {
                 SDL_RemoveTimer(timerId);
                 isGameQuit = true;
                 break;
             }
             
-            // Handle the speed of the snake. For now this is done through F1 (decrease) and F2 (increase) speed options
             if(event.type == SDL_KEYUP) {
                 if(getGameObject<GameOverObject>()->getIsGameOver() && event.key.keysym.sym == SDLK_RETURN) {
                     clean();
                     initialize();
                     break;
                 }
-                
-                if(event.key.keysym.sym == SDLK_F1) {
-                    int newSpeed = this->tickSpeed - 100;
-                    if(newSpeed >= 100) {
-                        this->tickSpeed = newSpeed;
+                            
+                switch(event.key.keysym.sym) {
+                    case SDLK_SPACE: {
+                        isGameRunning = !isGameRunning;
+                        break;
+                    }
+                    case SDLK_F1: {
+                        int newSpeed = this->tickSpeed - 100;
+                        if(newSpeed >= 100) {
+                            this->tickSpeed = newSpeed;
+                        }
+                        break;
+                    }
+                    case SDLK_F2: {
+                        int newSpeed = this->tickSpeed + 100;
+                        if(newSpeed <= 1000) {
+                            this->tickSpeed = newSpeed;
+                        }
+                        break;
+                    }
+                    case SDLK_F3: {
+                        FoodObject* foodObject = getGameObject<FoodObject>();
+                        movementSystem->processFoodPosition(getGameObject<SnakeObject>(), foodObject);
+                        Eigen::Vector2f positionVector = foodObject->getComponent<TransformComponent>()->positionVector;
+                        break;
+                    }
+                    case SDLK_F4: {
+                        isGameMode2 = !isGameMode2;
+                        clean();
+                        initialize();
+                        break;
+                    }
+                    default: {
+                        if(!isGameRunning) {
+                            isGameRunning = true;
+                        }
                     }
                 }
-                else if(event.key.keysym.sym == SDLK_F2) {
-                    int newSpeed = this->tickSpeed + 100;
-                    if(newSpeed <= 1000) {
-                        this->tickSpeed = newSpeed;
-                    }
-                }
-                else if(event.key.keysym.sym == SDLK_F3) {
-                    FoodObject* foodObject = getGameObject<FoodObject>();
-                    movementSystem->processFoodPosition(getGameObject<SnakeObject>(), foodObject);
-                    Eigen::Vector2f positionVector = foodObject->getComponent<TransformComponent>()->positionVector;
-                    std::cout << "(" << positionVector.x() << "," <<  positionVector.y() << ")" << std::endl;
-                }
-                else if(event.key.keysym.sym == SDLK_F4) {
-                    isGameMode2 = !isGameMode2;
-                    clean();
-                    initialize();
-                    break;
-                }
             }
-            else if(event.type == SDL_KEYDOWN && !isGameReady) {
-                isGameReady = true;
-            }
-            
-            if(!isGameReady) {
-                break;
-            }
-           
+
             // Process any inputs
             InputManager::getInstance()->process(event, getGameComponents<SnakeObject, InputComponent>());
-            
+
             // Handle the user event
-            if(event.type == SDL_USEREVENT) {
+            if(isGameRunning && event.type == SDL_USEREVENT) {
                 if(!getGameObject<GameOverObject>()->getIsGameOver()) {
                     movementSystem->process(this->getGameObject<SnakeObject>(), this->getGameObject<FoodObject>(), this->getGameObject<GameOverObject>());
                     draw();
