@@ -76,7 +76,7 @@ void GameWorld::initialize() {
     SnakeObject* snakeObject = new SnakeObject(SnakeBodyComponent::CELL_WIDTH, 20 * SnakeBodyComponent::CELL_HEIGHT, isGameMode2);
     gameObjects.push_back(snakeObject);
     
-    FoodObject* foodObject = new FoodObject(0, 0, SnakeBodyComponent::CELL_WIDTH, SnakeBodyComponent::CELL_HEIGHT);
+    FoodObject* foodObject = new FoodObject(0 /* unused */, 0 /* unused */, SnakeBodyComponent::CELL_WIDTH, SnakeBodyComponent::CELL_HEIGHT);
     movementSystem->processFoodPosition(snakeObject, foodObject);
     gameObjects.push_back(foodObject);
     

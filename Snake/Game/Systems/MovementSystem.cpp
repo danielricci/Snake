@@ -101,9 +101,8 @@ void MovementSystem::processFoodPosition(SnakeObject* snakeObject, FoodObject* f
         for(int j = 0; j < height; j += SnakeBodyComponent::CELL_HEIGHT) {
             Eigen::Vector2f position(i, j);
             bool found = false;
-            for(auto snakeBodyTailIterator = snakeBodyComponent->getTailIterator(); *snakeBodyTailIterator != snakeBodyComponent->getHead(); ++snakeBodyTailIterator) {
-                TransformComponent* snakeBodyTailTransform = (*snakeBodyTailIterator);
-                Eigen::Vector2f snakeBodyWorldPosition = snakeBodyTailTransform->getWorldPositionVector();
+            for(auto snakeBodyTailIterator = snakeBodyComponent->getTailIterator(); snakeBodyTailIterator != snakeBodyComponent->getHeadIterator(); ++snakeBodyTailIterator) {
+                Eigen::Vector2f snakeBodyWorldPosition = (*snakeBodyTailIterator)->getWorldPositionVector();
                 if(snakeBodyWorldPosition.x() == i && snakeBodyWorldPosition.y() == j) {
                     found = true;
                     break;
