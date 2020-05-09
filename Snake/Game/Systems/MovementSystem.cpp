@@ -59,7 +59,8 @@ void MovementSystem::process(SnakeObject* snakeObject, FoodObject* foodObject, G
         SDL_GetWindowSize(&window, &width, &height);
       
         // The player has won the game
-        if(snakeBodyComponent->getLength() == width * height) {
+        if(snakeBodyComponent->getLength() == (width / SnakeBodyComponent::CELL_WIDTH) * (height / SnakeBodyComponent::CELL_WIDTH)) {
+            std::cout << "YOU WIN!!! :) :) :)" << std::endl;
             gameOverObject->setIsGameOver(true);
         }
         
@@ -113,9 +114,11 @@ void MovementSystem::processFoodPosition(SnakeObject* snakeObject, FoodObject* f
             }
         }
     }
-
-    std::uniform_int_distribution<unsigned long> distribution(0, positions.size() - 1);
-    std::mt19937 generator(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
-    unsigned long finalIndex = distribution(generator);
-    foodObject->getComponent<TransformComponent>()->positionVector = positions[std::fmax(0, std::fmin(finalIndex, positions.size() - 1))];
+    
+    if(positions.size() > 0) {
+        std::uniform_int_distribution<unsigned long> distribution(0, positions.size() - 1);
+        std::mt19937 generator(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
+        unsigned long finalIndex = distribution(generator);
+        foodObject->getComponent<TransformComponent>()->positionVector = positions[std::fmax(0, std::fmin(finalIndex, positions.size() - 1))];
+    }
 }
