@@ -31,6 +31,7 @@
 
 #include <algorithm>
 #include <chrono>
+#include <cmath>
 #include <iostream>
 #include <numeric>
 #include <random>
@@ -90,44 +91,32 @@ void MovementSystem::process(SnakeObject* snakeObject, FoodObject* foodObject, G
 
 void MovementSystem::processFoodPosition(SnakeObject* snakeObject, FoodObject* foodObject) {
     
-    SnakeBodyComponent* snakeBodyComponent = snakeObject->getComponent<SnakeBodyComponent>();
-            
-    // Create the lists to hold all valid horizontal and vertical locations
-    std::vector<int> horizontalLocations;
-    std::vector<int> verticalLocations;
-    
     int width = 0;
     int height = 0;
     SDL_GetWindowSize(&window, &width, &height);
 
-    // Fill both lists with values start at origin (0,0) outwards to width and downwards to height
+    SnakeBodyComponent* snakeBodyComponent = snakeObject->getComponent<SnakeBodyComponent>();
+    std::vector<Eigen::Vector2f> positions;
     for(int i = 0; i < width; i += SnakeBodyComponent::CELL_WIDTH) {
-        horizontalLocations.push_back(i);
-    }
-    for(int i = 0; i < height; i += SnakeBodyComponent::CELL_HEIGHT) {
-        verticalLocations.push_back(i);
-    }
-
-    // Based on each x and y position of each snake body, remove that number from the horizonal and vertical location lists
-    // After doing that, you are left with two lists that have values where the snake body is not located.
-    for(auto snakeBodyTailIterator = snakeBodyComponent->getTailIterator(); *snakeBodyTailIterator != snakeBodyComponent->getHead(); ++snakeBodyTailIterator) {
-        TransformComponent* transformComponent = *snakeBodyTailIterator;
-        std::vector<int>::iterator horizontalIndexIterator = std::find(horizontalLocations.begin(), horizontalLocations.end(), transformComponent->getWorldPositionVector().x());
-        if(horizontalIndexIterator != horizontalLocations.end()) {
-            horizontalLocations.erase(horizontalIndexIterator);
-        }
-        std::vector<int>::iterator verticalIndexIterator = std::find(verticalLocations.begin(), verticalLocations.end(), transformComponent->getWorldPositionVector().y());
-        if(verticalIndexIterator != verticalLocations.end()) {
-            verticalLocations.erase(verticalIndexIterator);
+        for(int j = 0; j < height; j += SnakeBodyComponent::CELL_HEIGHT) {
+            Eigen::Vector2f position(i, j);
+            bool found = false;
+            for(auto snakeBodyTailIterator = snakeBodyComponent->getTailIterator(); *snakeBodyTailIterator != snakeBodyComponent->getHead(); ++snakeBodyTailIterator) {
+                TransformComponent* snakeBodyTailTransform = (*snakeBodyTailIterator);
+                Eigen::Vector2f snakeBodyWorldPosition = snakeBodyTailTransform->getWorldPositionVector();
+                if(snakeBodyWorldPosition.x() == i && snakeBodyWorldPosition.y() == j) {
+                    found = true;
+                    break;
+                }
+            }
+            if(!found) {
+                positions.push_back(position);
+            }
         }
     }
 
-    // Pick a random horizontal and vertical location and set the food object to that position
-    std::uniform_int_distribution<int> horizontalDistribution(0, static_cast<int>(horizontalLocations.size() - 1));
-    std::uniform_int_distribution<int> verticalDistribution(0, static_cast<int>(verticalLocations.size() - 1));
-    long long int seed = std::chrono::system_clock::now().time_since_epoch().count();
-    std::mt19937 generator((unsigned int)seed);
-    int horizontalIndex = horizontalDistribution(generator);
-    int verticalIndex = verticalDistribution(generator);
-    foodObject->getComponent<TransformComponent>()->positionVector = Eigen::Vector2f { horizontalLocations[horizontalIndex], verticalLocations[verticalIndex] };
+    std::uniform_int_distribution<unsigned long> distribution(0, positions.size() - 1);
+    std::mt19937 generator(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
+    unsigned long finalIndex = distribution(generator);
+    foodObject->getComponent<TransformComponent>()->positionVector = positions[std::fmax(0, std::fmin(finalIndex, positions.size() - 1))];
 }
