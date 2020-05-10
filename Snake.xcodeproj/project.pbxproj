@@ -79,6 +79,7 @@
 		03EFD232237D004B006EF2A5 /* GameWorld.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameWorld.cpp; sourceTree = "<group>"; };
 		03EFD233237D004B006EF2A5 /* GameWorld.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameWorld.hpp; sourceTree = "<group>"; };
 		03EFD237237E48D9006EF2A5 /* GameObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameObject.hpp; sourceTree = "<group>"; };
+		03FA29912467826000EEDC45 /* README.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = README.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +141,7 @@
 		039E6C0A234E30B0004CCD78 = {
 			isa = PBXGroup;
 			children = (
+				03FA29912467826000EEDC45 /* README.gif */,
 				03830797243597E100F39FC0 /* .gitignore */,
 				03830796243597E100F39FC0 /* LICENSE */,
 				0317C67F2352500C00D43455 /* Snake */,
