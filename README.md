@@ -6,7 +6,7 @@ This is a remake of the classic Snake arcade game
 
 ![](README.gif)
 
-###Controls
+### Controls
 
 Use the arrows keys on your keyboard to move the snake in the direction you want to go
 
